@@ -1,0 +1,595 @@
+Java Core Questions:
+
+    1. Java 8 memory management ? 
+        https://www.youtube.com/watch?v=fM8yj93X80s
+        Stack , heap , garbage collection 
+        Stack - 
+            linear data structure that stores collection of objects. Follows LIFO 
+            It occupies RAM. Data access is fast
+            It stores primitives and local method variables i.r. object references 
+            It is used to execute the thread 
+            After a thread is comlpete, stack is automatically cleared. 
+
+        Heap: 
+            A memory space that stores the Objects and codes of a program 
+            data access from heap is slower than stack 
+            Memory maangement is not done automatically , garbage collection happens when needed. 
+            heap area has : Young space & Old space. 
+            Garbage collection happens in the Old space (using FIFO)
+        
+    Lamda expression:
+
+    2. Functional interface :
+        Single Abstract method , 
+        no restriction on default and static methods 
+        @FunctionalInterface - rstricts the interface to have SAM.
+
+    3. Method reference : 
+        Replacement of lamda expression.
+        To improve code-reusabilty 
+        a. Static method reference (using CLass name)
+        b. Instance method reference (using object) 
+        c. Constructor reference (using CLass::new)
+
+    4. What are default methods ?
+        Way to add new methods to the interfaces without affecting the implementations 
+        Backward compatibility is taken care of 
+
+    5. Is it required to override the default Interfaces ? 
+        No, it's not required. If only if Implementing class is not satisfied with the default implementation then it can override it. 
+
+    6. Is default keyword in Interfaces a access modifier ?
+        In interfaces default is not a access modifer 
+        It is used to provide the default implementations for the methods
+        Acts as a defender to prevent breaking changes in the implementations
+    
+    7. How to override default methods from interfaces ? 
+        using public access modifier we have to overrirde the default methods from interface 
+        giving default access modifier will give compile time error, because it reduces the visibility of the methods.
+        That's why default is not a access modifier in interface method. by default interface methods are having public visibility 
+    
+    8. Can you use hashcode() default implementation in interface ? 
+        No, because a default method cannot override a method from Object class 
+        It will give compile time error. 
+        Also, hashcode() is used to return a memory location of an Object in hashed format. So, every class have it's own implementation 
+
+    9. Diamond Problem : 
+        It occurs in Multiple inheritances 
+        When a class extends 2 other classes. And both of those classes have a same method. Then the child class will get confused which method to override. 
+        So, Java doesn't allow multiple inheritances with Classes 
+    
+    10. How Interface's default methods cope up with Diamond problem ? 
+        When you have duplicate default methods in 2 interface. and a class is implementing the 2 interface. 
+        Compile time comes, saying Duplicate default methods in 2 interface types. 
+        Class can override the default method. If it has to access any implementationof Interface : Interfacename.super.methodName() 
+
+    11. Why static methods are used in Interface ?
+        Earlier to access static methods we have to create Class 
+        Creating class is a costly process. When a class is loaded it loads the 
+        Constructors, Instance blocks , Static blocks. 
+        When u implement methods in Interface, we ca directly call the methods using Interface name.     
+    
+    12. Are Interface static methods available to implementing clases ? 
+        No, static method cannot be overriden.
+        static method are not available to Child classes 
+
+    Inbuilt functional interface: https://youtu.be/3b8I4rzqF0c
+    13. Predicates :
+        boolean void test(T t) - used to store the boolean check conditons
+            eg: Predicate<String> checkString = s -> s.length() > 5 ;
+                checkString.test("Ashutosh");
+    
+    14. What is Predicate Joining ? 
+        3 ways to join a Predicate: 
+        And, Or, Negate 
+        example: 
+        Predicate<String> checkLength = s -> s.length() > 5 ;
+        Predicate<String> checkEvenLength = s -> s.length()%2 == 0;
+        checkLength.and(chcekEvenLength).test("Ashutosh");
+        checkLength.or(checkEvenLength).test("ashutosh);
+        checkLength.negate().test("ashutosh") -> negate returns Opposite value of checkLength() boolean value 
+    
+    15. Function interface:
+        R apply(T t) : Consumes T type of data , produces R type of data 
+
+    16. Functional chaining :
+        andThen() , compose() 
+        Example : 
+        fucntion1.andThen(fucntion2).apply(value) : function1 is calculated then result is sent to fucntion2 for calculated  
+        function1.compose(function2).apply(value) : function2 is calculated then result is sent to function1 
+
+        Also, multiple fucntios can be chained using andThen() 
+        funtion1.andThen(function2).andThen(function3)...
+
+    17. Consumer :
+        public void accept(T t);
+        It consumes the object, without returning anything 
+
+    18. Consumer chaining :
+        andThen() 
+        eg: 
+        c1 = name -> sout("Hello "+name);
+        c2 = name -> sout("Length: "+name.length())
+        c1.andThen(c2).accept(name);
+
+    19. Difference between Function and Consumer: 
+        No compose() method in Consumer 
+
+    20. Supplier functional interface: 
+        public R get();
+        -No other static or default methods in interface 
+        Supplier<Date> currentDate = () -> new Date();
+        currentDate.get();
+
+    21. Why No chaining is there in Supplier?
+        Since, we don't give any input to the supplier, so there is no need for chaining 
+
+    22. BiPredicate, BiFunction, BiConsumer 
+        -No Bi for Supplier because , Suplier doesn't have any input 
+        -BiPredicate<T,U> : boolean test(T t, U u)
+        -BiFunction<T,U,R> : R apply(T t, U u)
+    
+    23. Stream API: 
+        To process bulk objects of collection 
+        Its a special iterator class that allows processing of collection object in a functional manner 
+
+
+    24. How to create Stream :
+        Configure the stream, process the stream 
+        list.stream().filter( predicate).collect(Collectors.toList());
+        list.stream().filter( predicate).count();
+        list.stream().filter( predicate).sorted(); -> natural sorting 
+        
+    25. Custom Sorting in stream:     
+        Comparator<T> desc = (i1,i2) -> i2.compareTo(i1);
+        list.stream().filter( predicate).sorted(desc);  -> descending sorting 
+
+    26. How to process Min, Max in Stream :
+        Using comparator , define a ascending comparator 
+        Supply this comparator to min() and max() methods
+        example:
+        list.stream().min((i1,i2) -> i1.compareTo(i2));
+        list.stream().max((i1,i2) -> i1.compareTo(i2)); 
+
+    27. What is the use of Stream.of():
+        TO convert any group of values into stream 
+
+    28. Parallel Stream: 
+        Stream that utilizes all the cores of CPU. 
+        stream are broken into tasks, and executes parallel in all cores. 
+        This is done when:
+        Order of execution is not important 
+        State of elements in stream does not depend on each other 
+    
+    29. flatMap: 
+        Stream<R> flatMap(Function<T, Stream<R>> f)
+        example: 
+        class Order {
+            List<Items> items ;
+        }
+        class Items {
+            String name;
+            BigDecimal price;
+        }
+        List<Order> orders = new ArrayList<>();
+        Problem Statement: Find the Total price of Items which are Tea: 
+        orders
+            .stream()
+            .flatMap(order -> order.items.stream())
+            .filter(items -> items.name.equalsIgnoreCase("Tea"))
+            .mapToInt(items -> items.price.intValue())
+            .sum();
+        
+    30. How Hashmap are implemented and How Hash collision is avoided ? 
+        https://www.youtube.com/watch?v=c3RVW3KGIIE
+        HashMap is a collectiion of associative array data structures of Key-value association pairs 
+        HashMap is based on a technique called hashing. hashing converts a Object data to an integer value 
+        Every object has a hashcode available. 
+        If 2 Objects are Equal, then they should have the same hashcode (Equals and Hashcode contract)
+        Hashcode is important because hashcodeis used to store value in hashmap 
+
+        Structure of Hashmap: 
+        A hashmap is table, a collection of Nodes. Where each Node has 
+            int hash,
+            K key,
+            V value,
+            Node<K,V> next : pointer to the next node. 
+        So, each index in HashMap is basically a LinkedList of Node<K,V>
+        Each index in Hasmap is called a bucket 
+
+    31. How Hash Collision is avoided: 
+        Hash Collison scenario occurs when we do PUT operations in the HashMap 
+        Steps: 
+            put(K k,V v)
+            hash(k)
+            int index = hash & (size of HashMap)  : Bitwise AND operations 
+            Value(V) is stored at the index 
+
+        Now, when in the calculation of index ,if we get same index for multiple keys, then hashmap tries to store the key 
+        in the already filled index position, and leads to hash collision 
+
+        TO avoid it, 
+        In the Node we have the pointer (Node(K,V) next) , so the new key is added a next Node.
+        So, we get multiple Nodes<k,V> for that same index.     
+
+    32. Memory management in Java 8: 
+        https://www.youtube.com/watch?v=fM8yj93X80s
+
+    33. Hashmap, HashTable, ConcurrentHashMap - all kinds of map implementation
+        https://www.youtube.com/watch?v=APL28XpFP0c
+        HashTable : 
+            Legacy java API, implementation of Map interface . this was introduced before the Collection api came t picture (java 1.2)
+            This is a thread safe class, all the public methods are synchronized 
+            This is not a performance benefit when you have multiple thread reading from the collection. 
+            It doesn't accept any Null key 
+        
+        HashMap : 
+            Implementation of Map interface 
+            Not a thread safe class 
+            Insertion order is not guarented
+            Allows insertion of NULL keys 
+            Most usage when HashMap is populated once, and then fetched everytime 
+            Throws ConcurrentModificationException ,when data is written while Iterator reads 
+            So, Iterator fails fast 
+
+        LinkedHashMap:
+            Insertion order is guarenteed
+            Used where insertion order matters. 
+            Internally structures is DoublyLinkedList 
+
+        TreeMap: 
+            Implements SortedMap and NavigableMap interface
+            Insertion of elements is sorted 
+            Doesn't allow any NUll keys 
+            Sort is in natural ascending order 
+
+        WeakHashmap:
+            Can be used in cache 
+            here, Garbage Collectorscan clear the weak referenced keys in the map. 
+            In Java Strong reference is: 
+            when a reference variable has an actual object associated to it. 
+            If the object goes out of the heap memory or the reference breaks, the it becomes a 
+            weak reference. 
+            If there are any such weak referenced keys in a WeakHashmap, it gets garbage collected 
+        
+        Collections.synchronizedMap(map) :
+            similar to hashtable 
+        
+        ConcurrentHashMap : 
+            Retrieval operations doesn't require a lock,
+            Write operations doesn't require lock on entire table.
+            Map is divided into segments(16)
+            So, 16 threads can operate on it at a given time. 
+            Iterations doesn't throw ConcurrentModificationException
+            So, iterator doesnot fail-fast 
+            Null keys are not allowed  
+
+                MultiThreading environment example: 
+                ExecutorService service = Executor.newFixedThreadPool(2);
+                service.submit(Orders::processOrders);
+                service.submit(Orders::processOrders);
+
+                service.awaitTermination(1, SEC);
+                service.shutdown();
+        
+        ArrayList internally uses Arrays as a data structure 
+        It keeps the order of insertion 
+        It is used to fetching data 
+
+        LinkedList interanlly uses Nodes as data structure. Nodes are doubly linked. 
+        Preferred for frequent modifications 
+
+        Association: 
+        1. Aggregation: 
+            Weak association. 2 objects in a Aggregation-association, can exist without one another. 
+            example: Bank and Employee 
+        
+        2. Composition: 
+            Strong association. 2 objects are mutually dependent on each other. 
+            Destruction of one object directly impacts the other.
+            example: Engline and Car class 
+
+    Java IO: 
+        Serialization 
+        Deserialization 
+        Serialization and Deserialization in terms of Inheritance: (All 3 scenarios)
+
+    Java MultiThreading:
+        Thread class 
+        Runnable interface  
+        How to start a thread. 
+        Thread Lifecycle 
+        ExecutorService vs Executor class/interface 
+        submit() and execute() method 
+        ThreadPool methods 
+
+    Object class methods:
+        clone 
+        Equals and hashcode contract:
+            If 2 objects are equal by equals() method , then both should have the same hashcode 
+            Hashing algo: Objects.hash(firstName, lastname)
+
+    Shalow copy:
+        Same Object in heap has two reference values. 
+        Any change in the heap value will affect both the references.
+
+    Deep Copy:
+        All the references have their individual object value in the heap memory.
+        And second object values are individualy copied from 1st object.
+    
+    Clone() :
+        It's an automatic way of creating a copied object with a different heap space,
+        also having all the Object properties cloned in the 2nd object. 
+        The cloning class must implement Clonable interface. 
+
+    Comparator vs Comparable: 
+        Both are used for comparing objects. 
+        Comparable uses: int compareTo(T t)
+        Comparator uses: int compare(T t1, T t2) 
+
+        To use Comparable, we need to implement in the domain class, sometimes modifying source code is not allowed.
+        We can use comparator as a lambda expression.
+        We can use chaining : thenComparing()
+                                reversed() 
+
+
+Garbage collection: 
+    Objects stored in heap memory becomes eligible for GC, when no reference variable is pointing to it
+    That is an unrefernceed object 
+    Automatic java garbage colelction
+    To prevent OutOfMemoryException 
+    JVM performs automatic java garbage colelction
+
+    User can also request for garbage collection: 
+    1. System.gc 
+        To verify Garbage collection is done, override finalize() method
+
+    2. Runtime.getRuntime().gc() : Runtime is a singleton class that will always provide a single instance of Runtime
+     Then override finalize() method of Object class to verify 
+
+
+ Spring Boot AOP:
+    1. Dependency for springboot:
+    spring-boot-starter-aop
+     <group-id>
+     <artifact-id>
+     <version> 
+     2. AOP is used for cross-cutting  concerns in the app 
+     eg: Logging purposes , Transaction logs 
+     or Advices: @Before @After @Setup 
+
+    3. Tutorial repo : 
+    https://github.com/RameshMF/spring-boot-tutorial/tree/master/springboot2-springaop-example
+    https://howtodoinjava.com/spring-boot2/aop-aspectj/
+    https://github.com/lokeshgupta1981/SpringExamples/tree/master/aop
+
+    4. Annotations: 
+    @Aspect - class level 
+    Method level: 
+    @Around 
+    @After , @Setup, @AfterThrowing 
+
+SpringBoot questions:
+
+    Swagger dependency 
+    JUnit test cases 
+    Project code overview 
+    Project architecture overview 
+    How MyBatis and Hibernate framework is implemented 
+    Microservice project overview 
+     
+    Project : 
+    DB : <dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+    Framework: Spring-boot     
+        3 layer architecture : Controller - Service - Repository layer 
+                                Entity and DTO classes 
+
+    @RequestParam : domain.com/orders?id=2 
+    methodName(@RequestParam int id)
+
+    @Pathparam : domain.com/orders/{orderId}
+    methodName(@PathParam("orderId") int id)
+
+    JUnit Testing Spring Boot app 
+        We are using Junit with Mockito library for our unit Testing purpose.
+
+        Annotations: 
+        Class level: @SpringBootTest , @AutoConfigureMockMvc {controller layer}
+        private MockMvc mockMvc; 
+        @Autowired controllerClass . 
+        @MockBean serviceClass 
+
+        Method level: 
+        @Before setup() , @Test - test cases 
+        In @Before we are initializing the mockMvc bean using MockMvcBuilders.standalonesetup(controller-class)
+        Writing the negative test scenarios & positive test case scenarios
+
+        Mockito.when(controller.method( Mockito.any() , Mockito.any() )).thenReturn(new FrontPirce())
+
+        //for passing request with parameters
+        mockMvc.perform( get(REQUEST_URL) 
+                .header()
+                .param()
+                .param()
+                .andExpect(MockMvcResultMatcheres.status().isBadRequest())  -> negative scenario
+        String json = res.andReturn().getResponse().getContentAsString()
+        objectMapper.readValue(json,Some.class)
+
+        //Request body 
+        json = ObjectMapper.writeValueAsString(object)
+         mockMvc.perform( get(REQUEST_URL) 
+                .header()
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .content(json)
+                .andExpect(status().isOK()) -> positive scenario 
+
+        To convert any object to Json: JsonUtility.toJson( object )
+        
+        assertEquals(compare the Result codes/ status codes );
+
+        Project Exception Handling :
+         BusinessException classes extending RuntimeException 
+            -ResultObject which contained the Details of the exception 
+         Exception class extending CannotAcquireLockException -> When SOAP call was not able to hit the Vertex server 
+    
+
+Hibernate Questions: 
+    1. What is hibernate: 
+    Hibernate is a ORM tool used for mapping Java POJO objects to memory 
+
+    Hibernate maps to DB using JPA annotations or XML mapping
+    Because Hibernate is an implementation of JPA 
+
+    Why Hibernate not JDBC:
+    Hibernate eliminates the bolier plate code: excess
+    HQl is more object oriented
+    Transaction maangement is done implicitly 
+    Hibernate throws unchecked unchecked exception HibernateException and JDBCexception
+    Hibernate provides cahing techniques
+
+    Important Interface of Hibernate:
+    1. Session factory - 
+        factory for session objects 
+    2. Session - 
+        used for connecting ur application to persistenrt
+        store like hibernate frmaework. it is used to get the physical connection to DB 
+        provides the CRUD fucntionality
+    3. Transaction -
+        interface to specify a single transaction in DB (atomic units)
+
+    Important annotationsin hibernate :
+    @Entity 
+    @Table 
+    @Id 
+    @GeneratedValue(strategy=GeneratedType.IDENTITY)
+    @EmbeddedId - composite primary key 
+    @Column 
+
+    Mappings:
+    @OneToOne - 
+    @ManyToOne
+    @ManToMAny 
+
+    @Cascade(casecasdetype)
+    @PrimaryKeyJoinColumn - to define the foreign key 
+
+    Code syntax for mapping : 
+    1. OnetoOne: 1 Employee has a single PersonalIDInformation
+    class Employee {
+    @OneToOne(targetEntity=PersonalIDInformation.class, cascade = CascadeType.ALL)
+    private PersonalIDInformation personalId ;
+    }
+
+    2. ManyToOne: many employees can have 1 address 
+    class Address {
+        @OneToMany(cascade=CascadeType.ALL)
+        private List<Student> students ;
+    }
+
+    3. ManyTOMany : Student and Degree relation :
+    class Student {
+
+        @ManyToMany(targetEntity=Degree.class, cascade= CascadeType.ALL)
+        @JoinTable( name= "StudentDegreeThirdTable",
+                    joinColumns = "StudentId",
+                    inverseJoinColumns = "CertificateId"   )
+        private List<Degree> degrees;
+    }
+
+    Configuration files in Hibernate ? :
+        1. hibernate-configuration file: hibernate.cfg.xml 
+            Does: populates session-factory properties for database specific connections.
+            Contains: 
+            <hibernate-configuration>
+                <session-factory> 
+                    <property>
+                    <mapping resource>
+                </session-factory>
+            </hibernate-configuration>
+
+        2. hibernate-mapping file: To map the DB tables to Java Object 
+        class_name.hbm.xml 
+        <hibernate-mapping> 
+            <class name=>
+                <id name=>
+                <property name=>
+            <class>
+        </hibernate-mapping>
+
+    Steps to create a Hibernate application: 
+        1. Create a POJO (persistent unit) 
+        2. mapping file 
+        3. Create the configuration file 
+        4. Class for retreiving or Storing the persistent POJO. (DAO/Repo class)
+        5. Run the app 
+
+    Difference btw getCurrentSession() and openSession():
+        1. getCurrentSession() : this returns a session bound to the hibernate context. 
+            this doesn't required to be closed. It gets closed automatically when the hibernate session is closed
+        2. openSesion() : This opens a new session, doesn't use the session currently in Hibernate context. 
+                Need to close it once DB operations are done. 
+            
+    Difference between Session methods : get() and load() :
+        get(): loads the data as soon as it is available.
+                supports eager loading. Even if data isn't available doesn't throw exception
+        load(): loads data when it is available 
+                supports lazy loading. Improves performance 
+                throws exception (ObjectNotFound) if no data found 
+
+    Hibernate Caching Types :
+        1. First Level Cache 2. Second level cache 3. Query level cache 
+
+        1. First level cache : 
+            session object provides first level cache. Enabled by default.
+            Cache can be cleared. 
+            Session cache will not be visible to other session. 
+            If session is closed all data in first level cache is cleared. 
+            session.clear()
+        
+        2. Second Level cache :
+            Disabled by default. Can be enabled by configuration
+            Implementation - eh-cache 
+        
+        How to enable 2nd level cache ?
+            1. Dependency in POM file   
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+            
+            2. Add configuration in hibernate-configuration file 
+                set the properties:
+                cache region factory_class 
+                use_second_level_cache -> true 
+                use_query_level_cache -> true 
+                eh-configuration file name 
+
+            3. Create a EH-configuration file 
+
+        How to enable 2nd level caching strategy technique ?
+            on the POJO persistent class : 
+            @Cache(usage= READ_ONLY, region="")
+            class Employee { }
+
+    Integrate Hibernate to existing Spring project : 
+
+    1.Entity life cycle states (Persistent Context): 
+    New State  
+    Managed State (cached from DB) 
+    Detached (if session is cleared)
+    Removed (if instance deleted)
+
+    Difference with JPA : 
+     Hibernate allows to delete instances even if it is in Detached state. 
+
+    Spring bean lifecycle:
+        IOC container is started 
+        Beans are instatiated
+        Dependencies are injected 
+        init() method are called ( @PostConstruct)
+        destroy() method is called (@PostDestroy)
+
+    
+    Messaging queue tasks ? RabitMq , Apache Kafka message queue 

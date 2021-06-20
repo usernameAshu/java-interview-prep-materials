@@ -1,0 +1,27 @@
+Project techstack: 
+Microservice based architecture 
+Frontend apps are developed using JS and React library 
+Authentication services are using Kong Authentication 
+API gateway is also developed using Node JS 
+Backend services are developed using Java, Node JS, GoLang 
+For each Microservice there is a single DB, which is of PostgreSQL 
+Caches are implemented using Redis 
+For cloud deployment we are using AWS services 
+Our application are dockerized along with the DB , and deployed in Amazon ECS 
+We are also using Amazon S3 buckets, to store files 
+Code are stored in Github repo
+For CICD we are using Jenkins server, which pulls the latest code from Git repo, builds and deploys in AWS ECS 
+We are using Kibana to view the Application logs,
+Also, using Amazon cloudwatch using sends alerts through Slack channels 
+
+Price Platform Microservice:
+Techstack: 
+Developed using Java and SpringBoot framework
+For connecting to DB we are using mybatis-framework as a Java persistence tool 
+Maven is used a build tool 
+for Unit testing : JUnit with Mockito library 
+Using docker-compose files to dockerize the app
+We are using PostGreSQL as DB, Cache is done in Redis, SQL file versioning done using Flyway 
+Code coverage : Jacoco (maven plugin: jacoco-maven-plugin)
+Application, DB and Redis cache are dockerized and depoyed in ECS 
+API testing is done in Postman client 
