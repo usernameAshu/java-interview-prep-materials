@@ -1,0 +1,40 @@
+https://youtu.be/PSAT-ORaQ-s
+1. Difference between Spring Framework and Spring Boot .
+
+2. Different scopes of Spring beans 
+
+3. What is the enhancement of hashmap implementation in java 8 ?
+
+4. What is Spring AOP ? 
+    -cross cutting concerns
+    -aspects as class 
+    -methods as Advices
+    -point cut 
+    -joint point 
+    -XML configuration implementation 
+    -AspectJ implementation
+
+5. Garbage collection : What is MetaSpace ? How does it differ from PermGen ? 
+    --Needs study 
+
+6. What is a multi catch block ? (pipelining)
+
+7. Hibernate: List out benefits of CriteriaQuery in hibernate : 
+    --Another way for data retreival
+    -Writing the native sql in object oriented format 
+    -No performace benefit over HQL. 
+
+8. What are the types of Cascades supported in JPA ? 
+    -Persists: 
+    -Merge: 
+    -Detached: 
+    -Refresh: 
+    -Removed: 
+    -ALL: 
+
+9. What is Microservices ? Why we are using it ? 
+    -increased fault tolerance 
+    -increase flexibility of scalability 
+    -ability to chose the correct tech stack for the microservices 
+    -faster time to market 
+    

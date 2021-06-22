@@ -347,6 +347,8 @@ Garbage collection:
     2. Runtime.getRuntime().gc() : Runtime is a singleton class that will always provide a single instance of Runtime
      Then override finalize() method of Object class to verify 
 
+JVM Architecture :  
+
 
  Spring Boot AOP:
     1. Dependency for springboot:
@@ -392,6 +394,21 @@ SpringBoot questions:
 
     @Pathparam : domain.com/orders/{orderId}
     methodName(@PathParam("orderId") int id)
+
+    SpringBoot security implementation:
+
+        Starter Package : 
+            <artifactId>spring-boot-starter-security</artifactId>
+
+        Normal in-DB authentication : 
+
+        Password authentication algorithms: 
+            SHA-256 
+            How to implement it ? 
+        
+        Token Based security : 
+
+        Oauth2.0 security implementation :
 
     JUnit Testing Spring Boot app 
         We are using Junit with Mockito library for our unit Testing purpose.
@@ -592,4 +609,13 @@ Hibernate Questions:
         destroy() method is called (@PostDestroy)
 
     
+    Restful Webservices: 
+        Webservice is a process in which we can use the fucntionality of a service/method of another class over a web network.
+        Exmaple we need to use the fucntionality of ClimateNearMe() method from Climate class implemented by a Weather company.
+        I don't need to implement the logic for ClimateNearMe() method. I just need to hit the API exposed by that Weather company for this 
+         particular fucntionality. 
+        Here that 3rd party API will have some strict API contract for Request-Response pattern over which we will request the data and will receive the 
+         response.
+        So, this is called restful webservices 
+
     Messaging queue tasks ? RabitMq , Apache Kafka message queue 
