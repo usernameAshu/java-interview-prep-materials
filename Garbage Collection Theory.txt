@@ -1,0 +1,102 @@
+Garbage Collection Theory and concepts:
+https://youtu.be/UnaNQgzw4zY
+
+It's on the hypothesis that : Most objects become unreachable 
+Reference from old objects to new objects exists only in small numbers (cache)
+
+live object : refered by some variable 
+dead object: Object is not refered by any reference 
+
+-reachable object 
+-unreachable object 
+
+method area of heap: permgen area 
+Garbage collection is carried out by a daemon thread called "garbage collector" 
+We cannot force a garbage collection to happen ( System.gc())
+
+When we cannot allocate any more memory in heap to store new object,
+then OutOfMemoryException occurs - memory leaks 
+
+Steps of Garbage collection:
+
+-mark 
+    -object graph scanning 
+-delete/sweep
+    delete the unreachable objects 
+-compacting 
+    compacting the memory by moving around objects 
+    and making the allocation contigious than fragmented 
+
+What are the generations in java heap ?
+    Heap is divided into:
+    -Young Generation 
+        -Eden space, Survivor1 space, Survivor2 space 
+    -Old generation space 
+
+    minor garbage collection happens in Young generation
+    major garbage collection happens in Old generation 
+
+-Perfomance : 
+ Responsiveness
+ Throughput 
+
+ Different Kinds of Garbage Collector: 
+    -serial collector 
+        runs on the single thread. It kicks in when the Old generation if full/near full 
+        When this runs, application faces pause in it's execution
+
+    -concurrent collector 
+        Runs the thread for GC along with the application execution 
+        Doesnot wait for the old generation to be full 
+        Stops the world only during mark/remark
+
+    -parallel collector 
+        Uses multiple CPUs to perform the GC
+        Multiple threads doing mark/sweep 
+        When the heap is full/near-full, this GC starts 
+        Stops the world when it runs 
+
+    -G1 garbage collector (Garbage first)
+        -heap memory are divided in small regions 
+
+Which Garbage Collector to use: ?
+    Concurrent Garbage collector : 
+        -When there is more CPU and more memory 
+        -Application demands short pauses 
+    
+    Parallel Garbage collector :
+        -When there is less memory  
+        -When there is less numbers of CPU 
+        -Application demands high Throughput, but can withstand pauses 
+
+Most web-application and financial application use Concurrent collector 
+
+How to implement Custom Garbage collection : 
+
+-XX:+UseSerialGC 
+-XX:+UseParallelGC
+-XX:+useParallelOldGC
+
+finalize() -> method should be called only for Logging purpose, no business logic should be included inside it
+    -finalize() method is called only once for a object when it's garbage collected 
+
+Tune the Heap : implementation
+ -this is used when we want to customize the size of heap (Young generation and Old generation)
+-Xmsvalue 
+-Xmxvalue (def:256m)
+-XX:NewRatio=ratio 
+
+If there is any memory leak issue :
+
+Garbage Collection Logging :
+    -verbose:gc 
+    very useful to debug the garbage collection 
+
+Tools : 
+    1. Visual GC plugin
+    -jvisualvm 
+
+    2. Java Heap Analyzer tool (JHAT)
+
+    3. Terracota Big memory 
+

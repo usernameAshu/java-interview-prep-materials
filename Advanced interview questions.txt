@@ -37,4 +37,9 @@ https://youtu.be/PSAT-ORaQ-s
     -increase flexibility of scalability 
     -ability to chose the correct tech stack for the microservices 
     -faster time to market 
-    
+    -easy debugging (isolation of issue in 1 service)
+
+
+Garbage Collection Advanced theory : 
+
+Database Sharding 

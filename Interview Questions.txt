@@ -16,6 +16,23 @@ Java Core Questions:
             Memory maangement is not done automatically , garbage collection happens when needed. 
             heap area has : Young space & Old space. 
             Garbage collection happens in the Old space (using FIFO)
+
+        Garbage collection: 
+            Objects stored in heap memory becomes eligible for GC, when no reference variable is pointing to it
+            That is an unrefernceed object 
+            Automatic java garbage colelction
+            To prevent OutOfMemoryException 
+            JVM performs automatic java garbage colelction
+
+            User can also request for garbage collection: 
+            1. System.gc 
+                To verify Garbage collection is done, override finalize() method
+
+            2. Runtime.getRuntime().gc() : Runtime is a singleton class that will always provide a single instance of Runtime
+             Then override finalize() method of Object class to verify 
+
+
+        JVM Architecture :  
         
     Lamda expression:
 
@@ -60,7 +77,7 @@ Java Core Questions:
     
     10. How Interface's default methods cope up with Diamond problem ? 
         When you have duplicate default methods in 2 interface. and a class is implementing the 2 interface. 
-        Compile time comes, saying Duplicate default methods in 2 interface types. 
+        Compile time occurs, saying Duplicate default methods in 2 interface types. 
         Class can override the default method. If it has to access any implementationof Interface : Interfacename.super.methodName() 
 
     11. Why static methods are used in Interface ?
@@ -72,6 +89,9 @@ Java Core Questions:
     12. Are Interface static methods available to implementing clases ? 
         No, static method cannot be overriden.
         static method are not available to Child classes 
+
+    12.1 : What is Superinterface-Subinterface relationship ?
+        
 
     Inbuilt functional interface: https://youtu.be/3b8I4rzqF0c
     13. Predicates :
@@ -162,6 +182,7 @@ Java Core Questions:
         State of elements in stream does not depend on each other 
     
     29. flatMap: 
+        To reduce the Collection of Collection object into a Collection stream. 
         Stream<R> flatMap(Function<T, Stream<R>> f)
         example: 
         class Order {
@@ -331,23 +352,6 @@ Java Core Questions:
         We can use comparator as a lambda expression.
         We can use chaining : thenComparing()
                                 reversed() 
-
-
-Garbage collection: 
-    Objects stored in heap memory becomes eligible for GC, when no reference variable is pointing to it
-    That is an unrefernceed object 
-    Automatic java garbage colelction
-    To prevent OutOfMemoryException 
-    JVM performs automatic java garbage colelction
-
-    User can also request for garbage collection: 
-    1. System.gc 
-        To verify Garbage collection is done, override finalize() method
-
-    2. Runtime.getRuntime().gc() : Runtime is a singleton class that will always provide a single instance of Runtime
-     Then override finalize() method of Object class to verify 
-
-JVM Architecture :  
 
 
  Spring Boot AOP:
