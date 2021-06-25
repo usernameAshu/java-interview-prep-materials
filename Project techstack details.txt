@@ -4,10 +4,10 @@ Frontend apps are developed using JS and React library
 Authentication services are using Kong Authentication 
 API gateway is also developed using Node JS 
 Backend services are developed using Java, Node JS, GoLang 
-For each Microservice there is a single DB, which is of PostgreSQL 
+For each backend Microservice there is a single DB, which is of PostgreSQL 
 Caches are implemented using Redis 
 For cloud deployment we are using AWS services 
-Our application are dockerized along with the DB , and deployed in Amazon ECS 
+Our application are dockerized along with the DB , and deployed in Amazon ECS cluster
 We are also using Amazon S3 buckets, to store files 
 Code are stored in Github repo
 For CICD we are using Jenkins server, which pulls the latest code from Git repo, builds and deploys in AWS ECS 
@@ -25,3 +25,13 @@ We are using PostGreSQL as DB, Cache is done in Redis, SQL file versioning done 
 Code coverage : Jacoco (maven plugin: jacoco-maven-plugin)
 Application, DB and Redis cache are dockerized and depoyed in ECS 
 API testing is done in Postman client 
+
+Roles: 
+I am a developer in this project. 
+ extra:
+    involved in scratch dev projects and also enhancement projects 
+    daily scrum meetings, we get the tasks 
+    For any new features/breaking changes - discussion with architects 
+    prepare the SRS documents - get it approved 
+    Start coding the services , write unit test cases 
+    Code coverage 85% -90% 

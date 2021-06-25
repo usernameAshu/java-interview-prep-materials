@@ -7,7 +7,7 @@ Java Core Questions:
             linear data structure that stores collection of objects. Follows LIFO 
             It occupies RAM. Data access is fast
             It stores primitives and local method variables i.r. object references 
-            It is used to execute the thread 
+            A thread has it's own stack 
             After a thread is comlpete, stack is automatically cleared. 
 
         Heap: 
@@ -91,7 +91,20 @@ Java Core Questions:
         static method are not available to Child classes 
 
     12.1 : What is Superinterface-Subinterface relationship ?
-        
+
+            when a interface extends another interfaces , then Subinterface-Superinterface  relationship arises.
+            interface (Subinterface) extends Superinterface1,Superinterface2
+
+            default-default conflict :
+                override the conflicting method a abstract method
+                overide the conflicting method and give a new default implementation
+                {dont use @Override annotations}
+
+            abstract-default conflict :
+                Override the conflicting method with an abstract method
+                Override the conflicting method with a default method and provide a new implementation.
+
+
 
     Inbuilt functional interface: https://youtu.be/3b8I4rzqF0c
     13. Predicates :
@@ -171,6 +184,20 @@ Java Core Questions:
         list.stream().min((i1,i2) -> i1.compareTo(i2));
         list.stream().max((i1,i2) -> i1.compareTo(i2)); 
 
+    26.1 : How to use Comparator chaining in stream ? 
+        Lets say Employee class has two fields: 
+            BigDecimal Deptid;
+            String name;
+        Have to sort the Deptid in ascending and then sort the Names in descending . Finally reverse sort the list. 
+            Comparator<Employee> ascendingId = (e1,e2) -> e1.getDeptId().compareTo(e2.getDeptId());
+            Comparator<Employee> descendingName = (e1,e2) -> e2.getName().compareTo(e2.getName());
+            Comparator<Employee> finalComaparator = ascendingId
+                            .thenComparing(descendingName)
+                            .reversed();
+
+            empList.stream().sorted(finalComaparator);
+
+
     27. What is the use of Stream.of():
         TO convert any group of values into stream 
 
@@ -207,7 +234,7 @@ Java Core Questions:
         HashMap is based on a technique called hashing. hashing converts a Object data to an integer value 
         Every object has a hashcode available. 
         If 2 Objects are Equal, then they should have the same hashcode (Equals and Hashcode contract)
-        Hashcode is important because hashcodeis used to store value in hashmap 
+        Hashcode is important because hashcode is used to store value in hashmap 
 
         Structure of Hashmap: 
         A hashmap is table, a collection of Nodes. Where each Node has 
@@ -239,7 +266,7 @@ Java Core Questions:
     33. Hashmap, HashTable, ConcurrentHashMap - all kinds of map implementation
         https://www.youtube.com/watch?v=APL28XpFP0c
         HashTable : 
-            Legacy java API, implementation of Map interface . this was introduced before the Collection api came t picture (java 1.2)
+            Legacy java API, implementation of Map interface . this was introduced before the Collection api came to picture (java 1.2)
             This is a thread safe class, all the public methods are synchronized 
             This is not a performance benefit when you have multiple thread reading from the collection. 
             It doesn't accept any Null key 
@@ -248,7 +275,7 @@ Java Core Questions:
             Implementation of Map interface 
             Not a thread safe class 
             Insertion order is not guarented
-            Allows insertion of NULL keys 
+            Only 1 NULL key and multiple NUll values
             Most usage when HashMap is populated once, and then fetched everytime 
             Throws ConcurrentModificationException ,when data is written while Iterator reads 
             So, Iterator fails fast 
@@ -256,6 +283,7 @@ Java Core Questions:
         LinkedHashMap:
             Insertion order is guarenteed
             Used where insertion order matters. 
+            Only 1 NULL key and multiple NUll values 
             Internally structures is DoublyLinkedList 
 
         TreeMap: 
@@ -292,13 +320,19 @@ Java Core Questions:
 
                 service.awaitTermination(1, SEC);
                 service.shutdown();
-        
+
+            The processOrders method increments the no of Orders in the ConcurrentHashMap
+
         ArrayList internally uses Arrays as a data structure 
         It keeps the order of insertion 
         It is used to fetching data 
 
         LinkedList interanlly uses Nodes as data structure. Nodes are doubly linked. 
         Preferred for frequent modifications 
+        class Node {
+            int data;
+            Node prev;
+            Node next; ..}
 
         Association: 
         1. Aggregation: 
@@ -353,6 +387,14 @@ Java Core Questions:
         We can use chaining : thenComparing()
                                 reversed() 
 
+    String class : 
+        Immutable class,
+        holds alphanumeric charecters 
+
+    String Pool: 
+        Special memory area in heap which stores String literals.
+        When we create a new String literal ( String a ="ahutosh") , JVM searches for this literal in the String pool, If it finds a match
+        then assigns that memory address to the reference variable. Else, it creates a new String literal in the String pool memory.
 
  Spring Boot AOP:
     1. Dependency for springboot:
@@ -403,6 +445,11 @@ SpringBoot questions:
 
         Starter Package : 
             <artifactId>spring-boot-starter-security</artifactId>
+
+        extends WebSecurityConfigureAdapter class , override the congifure(...) method
+        configure(..) method is overloaded. 
+            -AuthenticationManagerBuilder auth 
+            -HttpSecurity http 
 
         Normal in-DB authentication : 
 
