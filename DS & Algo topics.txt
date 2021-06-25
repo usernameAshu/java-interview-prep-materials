@@ -1,3 +1,57 @@
 Sorting algorithms 
 Time complexity 
 Space Complexity 
+
+1. How to create a Stack using Nodes in java : 
+
+    Structure:
+
+    String C 
+        |
+        |
+        v
+    String B 
+        |
+        |
+        v
+    String A 
+
+    Each Node has value and the next node pointer 
+    Stack should have the following fucntionality:
+        -check if it's empty 
+        -push elements into it
+        -pop elements from it 
+
+    Code implementation: 
+        
+        class Node {
+        String value;
+        Node next;
+        }
+        /**
+        During push we are moving the top position to the inserted Node 
+        While saving the new Node we are creating it and then saving the value 
+        Then, pointing to the old-top 
+        **/
+        public void push(String str) {
+            Node oldTop = top;
+            top = new Node();
+            top.next = oldTop;
+            top.value = str;
+        }
+
+        public String pop() {
+        if(top == null) {
+            return "Pop not possible";
+        } else {
+            String returnVal = top.value;
+            top = top.next;
+            return  returnVal;
+        }
+    }
+
+2. How to Create a Queue using Nodes (linkedList) in java ?
+        -Queue wll have a head, tail 
+        -enqueue : insert element after tail 
+        -dequeue : remove element at head 
+        -peek : see the head element without removing it 

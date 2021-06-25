@@ -31,6 +31,7 @@ Java Core Questions:
             2. Runtime.getRuntime().gc() : Runtime is a singleton class that will always provide a single instance of Runtime
              Then override finalize() method of Object class to verify 
 
+            From Java 8, permgen space in heap is removed 
 
         JVM Architecture :  
         
@@ -481,7 +482,7 @@ SpringBoot questions:
         mockMvc.perform( get(REQUEST_URL) 
                 .header()
                 .param()
-                .param()
+                .param())
                 .andExpect(MockMvcResultMatcheres.status().isBadRequest())  -> negative scenario
         String json = res.andReturn().getResponse().getContentAsString()
         objectMapper.readValue(json,Some.class)
@@ -654,7 +655,7 @@ Hibernate Questions:
 
     Spring bean lifecycle:
         IOC container is started 
-        Beans are instatiated
+        Beans are instantiated
         Dependencies are injected 
         init() method are called ( @PostConstruct)
         destroy() method is called (@PostDestroy)

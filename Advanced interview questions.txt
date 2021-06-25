@@ -42,4 +42,70 @@ https://youtu.be/PSAT-ORaQ-s
 
 Garbage Collection Advanced theory : 
 
-Database Sharding 
+Database Sharding :
+
+JVM architecture: (https://youtu.be/ZBJ0u9MaKtM)
+
+    Operation of JVM is to load and execute your app:
+    Main components of JVM:
+
+        Class loader subsystem 
+            |
+            |
+            V 
+        Runtime Data Areas 
+            |
+            |
+            V 
+        Execution Engine 
+    
+    Class loader subsystem:
+        -load :loading byte code(.class) to the memory 
+            -Bootstrap class loader (rt.jar) 
+            -Extension class loader (jars in jre/lib)
+            -Application class loader (CLASSPATH)
+
+        -link :
+            -Verify: looks into bytecode, checks compatibility 
+            -Prepare : memory is allocated for the static variables and default values assigned
+            -Resolve : all symbolic reference are resolved 
+
+        -initialize:
+            -static blocks are executed 
+            -static variables are assigned the actual values 
+
+    Runtime Data Area:
+        -Method area: 
+            -known as Permgen, 64MB -default
+            -Class data (static variables, byte code)
+            -If Permgen is Full -> OutOfMemoryException occurs 
+            - -XX:MaxPermSize
+            -From Java 8 , Permgen/Method area is removed. And Metaspace is created in the native OS. 
+                Metaspace doesn't have any space constraints. 
+
+        -Heap area:
+            -Object data is stored 
+            -To control heap size: -Xms 
+            -Heap area is created per JVM 
+            -this area is shared across all threads 
+        
+        -PC registers:
+            -Program Counters 
+            -Its is created per Thread 
+
+        -Java Stacks:
+            -Created per thread
+            -methods called are stacked up in the thread stack 
+            -Thread1 cannot see the Thread2 method execution 
+            -throws StackOverFlowError if Stack frame calls itself recursively infinte time. 
+            -For tuning java stacks: -Xss
+
+    Execution Engine: 
+        Interpreter: 
+        
+        JIT compiler:
+
+        Hotspot Profiler:
+
+        Garbage Collection: 
+
