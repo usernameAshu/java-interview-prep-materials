@@ -16,6 +16,10 @@ https://youtu.be/PSAT-ORaQ-s
 
 5. Garbage collection : What is MetaSpace ? How does it differ from PermGen ? 
     --Needs study 
+    --From Java 8 , Permgen/Method area is removed. And Metaspace is created in the native OS. 
+                Metaspace doesn't have any space constraints. 
+                Permgen had memeory constraint, due to which it throws OutOfMemoryException
+                In both cases we can manually fix the maximum space allocated 
 
 6. What is a multi catch block ? (pipelining)
 
@@ -40,11 +44,12 @@ https://youtu.be/PSAT-ORaQ-s
     -easy debugging (isolation of issue in 1 service)
 
 
-Garbage Collection Advanced theory : 
+10. Garbage Collection Advanced theory : 
+    -made a separate document (check that)
 
-Database Sharding :
+11. Database Sharding :
 
-JVM architecture: (https://youtu.be/ZBJ0u9MaKtM)
+12. JVM architecture: (https://youtu.be/ZBJ0u9MaKtM)
 
     Operation of JVM is to load and execute your app:
     Main components of JVM:

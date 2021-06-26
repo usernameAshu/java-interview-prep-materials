@@ -55,3 +55,86 @@ Space Complexity
         -enqueue : insert element after tail 
         -dequeue : remove element at head 
         -peek : see the head element without removing it 
+
+3. Binary Search algo : 
+    Iterative method: 
+        -list must be in sorted order 
+        -divide and conquer strategy 
+        -low, high , mid 
+        - While(low <= high) {
+            mid = (low + high)/2;
+
+            if(a[mid]==key) 
+                return mid;
+            else if(a[mid] > key )
+                high = mid - 1;
+            else 
+                low = mid + 1; 
+        }
+        -Time complexity is the height of the tree : O(log n)
+    
+    Recursive method: 
+        -reduce the list to a single element
+
+4. Mergesort algorithm: (https://youtu.be/6pV2IF0fgKY?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O)
+
+        -concept is combining two sorted list 
+        -2 way merging
+        -first in a while loop compare the 2 elements from the 2 array and copy the minimum to the third array.
+        -continue this process till any one of the array is traversed.
+        -loop end
+        -copy the remaining elements from the arrays into the third arrray
+
+        -concept for merging more than 2 list (3 list)
+        -m way merging 
+
+        -Time complexity of 2-way Mergesort : nlog n 
+        -lets say we have the below list to be sorted:
+        -9  3  7  5  6  4   8  2
+          \/    \/    \/     \/
+        - 3,9   5,7   4,6    2,8
+              \/          \/
+        -   3,5,7,9     2,4,6,8
+                    \/
+        -     2,3,4,5,6,7,8,9 
+
+
+        -Recursive procedure of merge sort (divide and conquer):
+            Divide and conquer: Break the problem into small problem(single element)
+            -If you have a array , it will break the array recursively into 1 element 
+             and merge them recursively (2-way Mergesort) to get the sorted array 
+
+             Alogorithm Mergesort(l,h) {
+                 if(l<h) {
+                     mid = (l + h)/2;
+                     Mergesort(l, mid);
+                     Mergesort(mid+1, h);
+                     Merge(l,mid,h);
+                 }
+             }
+            Time complexity : nlog n 
+
+5. QuickSort algorithm :(https://youtu.be/7h1s2SojIRw?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O)
+    -Not the fastest Alogorithm
+    -A sorted element (pivot)-> Element whose left side has smaller elements and right side has bigger elements 
+    -Partioning position procedure
+
+    Recursive algorithm : 
+    Algorithm Quicksort(l,h) {
+        if(l<h) {
+            j = Partioning(l,h);
+            Quicksort(l,j);
+            Quicksort(j+1,h)
+        }
+    }
+
+    Partioning :
+        Takes the 1st element of list as a pivot element.
+        Starts a counter from 1st element (i) , and another counter from last element (j)
+        i scans right and checks for element larger than pivot 
+        j scans left checks for element less then pivot 
+        when found, i and j elements get swap
+        when j crosses i, scan stops.
+        pivot element is swap with element at j 
+        j is return as pivot position 
+
