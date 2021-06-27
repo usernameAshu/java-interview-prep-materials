@@ -33,7 +33,7 @@ Java Core Questions:
 
             From Java 8, permgen space in heap is removed 
 
-        JVM Architecture :  
+        JVM Architecture :  (mentioned in Advanced Java Interview Questions) 
         
     Lamda expression:
 
@@ -394,9 +394,10 @@ Java Core Questions:
 
     String Pool: 
         Special memory area in heap which stores String literals.
-        When we create a new String literal ( String a ="ahutosh") , JVM searches for this literal in the String pool, If it finds a match
+        When we create a new String literal ( String a ="ashutosh") , JVM searches for this literal in the String pool, If it finds a match
         then assigns that memory address to the reference variable. Else, it creates a new String literal in the String pool memory.
 
+    
  Spring Boot AOP:
     1. Dependency for springboot:
     spring-boot-starter-aop

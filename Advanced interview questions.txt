@@ -37,12 +37,48 @@ https://youtu.be/PSAT-ORaQ-s
     -ALL: 
 
 9. What is Microservices ? Why we are using it ? 
+    Microservice is a architectural style that structures application as a collection of services that are:
+        Highly maintainable and testable
+        Loosely coupled
+        Independently deployable
+        Organized around business capabilities
+        Owned by a small team
+
     -increased fault tolerance 
     -increase flexibility of scalability 
     -ability to chose the correct tech stack for the microservices 
     -faster time to market 
     -easy debugging (isolation of issue in 1 service)
 
+9.1 What is Domain Driven Design ? 
+    Focus on core domain and core logic 
+    Finds the complex designs in the model 
+    Constant collaboration with Domain experts to improve the application model 
+
+    SOA design used to identify the services and expose the endpoints based on resuse.
+    In case of DDD , it brings business and service together. This is where domain design concept fits well for building the microservices. 
+
+9.2 What is Test Driven Development ? 
+    Process in which test cases are written before the code that validates those cases.
+    It depends on repetition of a very short development cycle
+    Steps: 
+        Add a test – Write a test case that describe the function completely. 
+        Run all the test cases and make sure that the new test case fails.
+        Write the code that passes the test case
+        Run the test cases
+        Refactor code – This is done to remove duplication of code.
+
+9.3 What are the SOLID principles in Java?
+    Single Responsibility Principle	
+        Each class should be responsible for a single part or functionality of the system.
+    Open-Closed Principle	
+        Software components should be open for extension, but not for modification.
+    Liskov Substitution Principle	
+        Objects of a superclass should be replaceable with objects of its subclasses without breaking the system.
+    Interface Segregation Principle	
+        No client should be forced to depend on methods that it does not use.
+    Dependency Inversion Principle	
+        High-level modules should not depend on low-level modules, both should depend on abstractions.
 
 10. Garbage Collection Advanced theory : 
     -made a separate document (check that)
@@ -114,3 +150,58 @@ https://youtu.be/PSAT-ORaQ-s
 
         Garbage Collection: 
 
+
+
+--MBRDI interview questions:
+How can we have return statements in try-catch-finaly block? All the scenarios. 
+    return statements can be put in all of the try-catch-finally blocks.
+    If return statemnt is in finally block, then it will override the return statement in try or catch block 
+    Also, if there is any println() statements. 
+    Ater all the println() stateemnts are printed from all the blocks, then the return value will be displayed
+
+Find out the list of prime numbers from a range. (use composite prime factors logic)
+
+What is difference of RequestParam and PathParam. What is the functionality difference ? Why use RequestParam and not PathParam ?
+    In case of RequestParam we can declare some variable as optional. 
+    @RequestParam(value="id" , required=false) int id 
+
+How can you access the headers in SpringBoot using annotations? from the URI  (https://www.baeldung.com/spring-rest-http-headers)
+    By using @RequestHeader 
+    Inside the annotations we pass value="" to extract the exact header, 
+    if unsure it's present use: required=false, for default value use: defaultValue="something"
+    code: 
+    @GetMapping("/default")
+    public ResponseEntity<String> evaluateDefaultHeaderValue(
+      @RequestHeader(value = "optional-header", required=false, defaultValue = "3600") int optionalHeader) {
+        return new ResponseEntity<String>(
+          String.format("Optional Header is %d", optionalHeader), HttpStatus.OK);
+    }
+
+How can we prevent IOC containers from storing beans of some classes, and how can we explicityly tell Spring not to create beans of these clases ?
+
+Tell more about the Spring bean scopes(singleton,prototype,request,session,global-session) - session , request : functionality, lifecylces 
+
+Remove large chunks of ArrayList elements while simultaneously adding it 
+EmployeeList has list of employees, remove those employees who are over the age of 60 
+Or, example: in Cowin app, we are removing the double vaccinated people from database while adding people partially/never vaccinated
+
+In hibernate. @Transactional annotations 
+What happens when a order is going to be placed, but stock gets empty. 
+What can be done to reverse the order placed.
+
+How SMTP domain can be integrated with Java ? 
+
+What is a Maven Multi module project ? (https://www.baeldung.com/maven-multi-module)
+    A multi-module project is built from an aggregator POM that manages a group of submodules. 
+    In most cases, the aggregator is located in the project's root directory and must have packaging of type pom.
+    Now, the submodules are regular Maven projects, and they can be built separately or through the aggregator POM.
+
+
+Why in spring boot: using the command: mvn clean install, creates 2 jar files in Target directory ?
+    In the target directory we basically have 2 types of jar files 
+    maven packaged jar (smaller size)
+    springboot repackaged jar (larger size) 
+    a. the JAR file created by the mvn package command contains only the resources and compiled Java classes from our project's source.
+    b. in the repackaged JAR file, we not only have the compiled Java classes from our project 
+       but also all the runtime libraries that are needed to start our Spring Boot application,
+       For example, an embedded tomcat library is packaged into the BOOT-INF/lib directory.

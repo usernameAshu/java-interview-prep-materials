@@ -1,3 +1,12 @@
+Intro:
+Hi i am Ashutosh, from Kolkata. I have been working in the IT industry for the last 4.5 years. 
+I have worked as Java and Database administrator roles in Capgemini. 
+Then i have been working on microservice projects in Qburst as Java SE 8 developer. 
+I have worked on projects involving Logistics domain, Retail and e-commerce domain and Electric Vehicle connected service domain. 
+
+Project Discussion: 
+I am working on a Microservice architecture based project. I am a part team who is developing and managing one of the microservice. 
+
 Project techstack: 
 Microservice based architecture 
 Frontend apps are developed using JS and React library 
@@ -18,10 +27,10 @@ Price Platform Microservice:
 Techstack: 
 Developed using Java and SpringBoot framework
 For connecting to DB we are using mybatis-framework as a Java persistence tool 
+We are using PostGreSQL as DB, Cache is done in Redis, SQL file versioning done using Flyway 
 Maven is used a build tool 
 for Unit testing : JUnit with Mockito library 
 Using docker-compose files to dockerize the app
-We are using PostGreSQL as DB, Cache is done in Redis, SQL file versioning done using Flyway 
 Code coverage : Jacoco (maven plugin: jacoco-maven-plugin)
 Application, DB and Redis cache are dockerized and depoyed in ECS 
 API testing is done in Postman client 
@@ -29,9 +38,14 @@ API testing is done in Postman client
 Roles: 
 I am a developer in this project. 
  extra:
-    involved in scratch dev projects and also enhancement projects 
     daily scrum meetings, we get the tasks 
     For any new features/breaking changes - discussion with architects 
     prepare the SRS documents - get it approved 
     Start coding the services , write unit test cases 
     Code coverage 85% -90% 
+    involved in scratch dev projects and also enhancement projects 
+
+JIRA flow: 
+   Epics -> user Story -> Tasks -> Subtasks 
+   In a sprint we are assigned few tasks.
+   Tasks are divided into Subtasks assigned to individual members. 
