@@ -205,3 +205,6 @@ Why in spring boot: using the command: mvn clean install, creates 2 jar files in
     b. in the repackaged JAR file, we not only have the compiled Java classes from our project 
        but also all the runtime libraries that are needed to start our Spring Boot application,
        For example, an embedded tomcat library is packaged into the BOOT-INF/lib directory.
+
+
+What is git cherry pick ?

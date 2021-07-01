@@ -1,0 +1,60 @@
+Oauth Theory: (https://www.youtube.com/watch?v=eEqkD1zlT3E)
+
+Authorization layer is separated from authentication layer
+Earlier SAML authentication was not able to provide access for particular 
+resource to any request. It was providing the entire content of the resource server.
+It was a claim based authentication as the Oauth 
+
+OAuth is an authorization layer in the identity layer. 
+
+Roles of Oauth :
+    Resource Owner  
+    Application/Client 
+    Authorization Server
+    Resource Server
+    Resources 
+
+Resource Owner (user) will use Application to access any Resource (protected) on Resource Server
+For that User need an acknowledgement from Authorization server.
+
+1. Registration of Client: 
+    Autorization server needs some sort of info to identify your application
+    Application registers on the Authorization Server. 
+    Authorization server issues a Client ID & Client Secret
+    Client ID is specific for the application 
+    Authorization identifies this "ClientID" to identify the Applicationj and decide on the requests coming from that application 
+
+2. Client Type:
+    Confidential
+    Public 
+    
+3. Client Profiles:
+    Web application
+    Native Client application
+
+Oauth 2.0 protocol Endpoints/Authorizatiion grant: 
+
+Generic flow of oauth:
+
+Users       Application/Client           Authorization Server          Resource Server 
+     ---1-------->              -----2------->/authorize                 
+                                 <------3-------                
+
+                                ---------4------>/token                                             
+                                <---------5-----
+                                -------------------6-------------------> /fetchResource
+                                <-------------------7-------------------
+    <---8--------
+
+when user trying to access Protected resource on server.
+
+Oauth2.0 FLows: 
+    1. Authorization Code grant flow
+    2. Client Credential flow 
+    3. Resource Owner password flow
+    4. Implicit flow
+
+Authorization Code Grant Flow: (Azure Active Directory perspective)
+
+
+

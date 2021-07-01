@@ -1,8 +1,10 @@
 Intro:
 Hi i am Ashutosh, from Kolkata. I have been working in the IT industry for the last 4.5 years. 
-I have worked as Java and Database administrator roles in Capgemini. 
+I have worked on Java and Database administrator roles in Capgemini. 
 Then i have been working on microservice projects in Qburst as Java SE 8 developer. 
 I have worked on projects involving Logistics domain, Retail and e-commerce domain and Electric Vehicle connected service domain. 
+
+Product based 
 
 Project Discussion: 
 I am working on a Microservice architecture based project. I am a part team who is developing and managing one of the microservice. 
@@ -41,6 +43,7 @@ I am a developer in this project.
     daily scrum meetings, we get the tasks 
     For any new features/breaking changes - discussion with architects 
     prepare the SRS documents - get it approved 
+    API design documents 
     Start coding the services , write unit test cases 
     Code coverage 85% -90% 
     involved in scratch dev projects and also enhancement projects 

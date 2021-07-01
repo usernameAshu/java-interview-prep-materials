@@ -78,7 +78,7 @@ Space Complexity
 
 4. Mergesort algorithm: (https://youtu.be/6pV2IF0fgKY?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O)
 
-        -concept is combining two sorted list 
+        -concept is combining two unsorted list 
         -2 way merging
         -first in a while loop compare the 2 elements from the 2 array and copy the minimum to the third array.
         -continue this process till any one of the array is traversed.
