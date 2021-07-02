@@ -1,4 +1,6 @@
-Oauth Theory: (https://www.youtube.com/watch?v=eEqkD1zlT3E)
+Oauth Theory: 
+    https://www.youtube.com/watch?v=eEqkD1zlT3E
+    https://developers.google.com/identity/protocols/oauth2/web-server#httprest_1
 
 Authorization layer is separated from authentication layer
 Earlier SAML authentication was not able to provide access for particular 
