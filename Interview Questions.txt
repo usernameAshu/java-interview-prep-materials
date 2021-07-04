@@ -78,7 +78,7 @@ Java Core Questions:
     
     10. How Interface's default methods cope up with Diamond problem ? 
         When you have duplicate default methods in 2 interface. and a class is implementing the 2 interface. 
-        Compile time occurs, saying Duplicate default methods in 2 interface types. 
+        Compile time error occurs, saying Duplicate default methods in 2 interface types. 
         Class can override the default method. If it has to access any implementationof Interface : Interfacename.super.methodName() 
 
     11. Why static methods are used in Interface ?
@@ -334,6 +334,18 @@ Java Core Questions:
             int data;
             Node prev;
             Node next; ..}
+
+        Set: 
+        A Set is a Collection that cannot contain duplicate elements. The Set interface contains only methods inherited from Collection 
+        and adds the restriction that duplicate elements are prohibited.
+
+        TreeSet:
+        contains unique elements only like HashSet. 
+        doesn't allow null element.
+
+        HashedSet:
+        HashSet contains unique elements only.
+        HashSet allows null value.
 
         Association: 
         1. Aggregation: 

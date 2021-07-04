@@ -76,7 +76,7 @@ https://youtu.be/PSAT-ORaQ-s
     Liskov Substitution Principle	
         Objects of a superclass should be replaceable with objects of its subclasses without breaking the system.
     Interface Segregation Principle	
-        No client should be forced to depend on methods that it does not use.
+        No client should be forced to implement the methods that it does not use.
     Dependency Inversion Principle	
         High-level modules should not depend on low-level modules, both should depend on abstractions.
 
@@ -84,6 +84,7 @@ https://youtu.be/PSAT-ORaQ-s
     -made a separate document (check that)
 
 11. Database Sharding :
+    -larger databases are divided into smaller databases, for faster execution and faster fetch of queries.
 
 12. JVM architecture: (https://youtu.be/ZBJ0u9MaKtM)
 
@@ -190,6 +191,7 @@ What happens when a order is going to be placed, but stock gets empty.
 What can be done to reverse the order placed.
 
 How SMTP domain can be integrated with Java ? 
+    Simple Mail Transfer Protocol 
 
 What is a Maven Multi module project ? (https://www.baeldung.com/maven-multi-module)
     A multi-module project is built from an aggregator POM that manages a group of submodules. 
