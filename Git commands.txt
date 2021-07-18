@@ -1,0 +1,38 @@
+1. To get the remote URL for the repo: 
+git config --get remote.origin.url
+
+docker run --name cache-testing -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cache_test_db -e MYSQL_USER=springuser -e MYSQL_PASSWORD=springuser -d mysql:5.7
+
+
+docker run --name cache-testing -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cache_test_db -e MYSQL_USER=springuser -e MYSQL_PASSWORD=springuser
+
+Working commands:
+docker container run -d --name mysqldb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:latest
+docker exec -it mysqldb bash
+mysql -u root -ppassword
+show databases;
+
+
+create database XYZ;
+Stops docker running container:
+docker container stop CONTAINER 035
+docker container start 035
+
+Connection details: (for mysqldb container)
+Name: cache_test_db
+URL: jdbc:mysql://localhost:3306/cache_test_db
+user: root 
+passwordL password 
+
+docker container run -d --name hibernate-practice -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:5.7
+docker exec -it hibernate-practice bash
+mysql -u root -ppassword
+show databases;
+create database bookstore;
+
+Connection details: (for hibernate-practice container)
+Name: bookstore
+URL: jdbc:mysql://localhost:3306/bookstore
+user: root 
+passwordL password 
+

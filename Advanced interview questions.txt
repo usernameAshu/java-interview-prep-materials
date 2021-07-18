@@ -4,6 +4,8 @@ https://youtu.be/PSAT-ORaQ-s
 2. Different scopes of Spring beans 
 
 3. What is the enhancement of hashmap implementation in java 8 ?
+    Buckets containing a large number of colliding keys will store their entries in a balanced tree instead of a linked list 
+    after certain threshold is reached.
 
 4. What is Spring AOP ? 
     -cross cutting concerns
@@ -210,3 +212,97 @@ Why in spring boot: using the command: mvn clean install, creates 2 jar files in
 
 
 What is git cherry pick ?
+
+What is Hibernate @Transactional Annotations ? And different types of Transactions that happen (Propagation, isolation) ?
+what are the different level of propagaton ? What are the different levels of isolation ?
+What are idempotent methods in REST ?
+ -HTTP methods which when called multiple times would impact the state of DB as it impacts for single time. 
+ -GET, PUT are the idempotent methods in HTTP 
+
+What is CDN (content delivery network) ? 
+
+What is the difference between DELETE and TRUNCATE ? 
+
+Reverse the first k elements in a Queue (Use lib function)
+•	Input : Q = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] and k=4
+•	Output : Q = [40, 30, 20, 10, 50, 60, 70, 80, 90, 100]
+
+Reverse each letter of a sentence 
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		String s = "Rama is a good boy" ;
+		
+		/*StringBuilder sbr = new StringBuilder(s);
+		sbr.reverse();*/
+		
+		/*
+		take the length 
+		str[] -> strs, str[]  */
+		
+		int j=0;
+		String[] starr = s.split(" ");
+		/**
+		 * s.spilt(" ")
+		 * */
+
+		for(int i=0;i<starr.length;i++) {
+		  // System.out.print(starr[i]+" ");
+		  String newStr = starr[i] ;
+		   // R a m a -> 
+		   for(int k=newStr.length()-1;k>=0;k--) { 
+		    System.out.print(newStr.charAt(k));
+		    }
+		    System.out.print(" ");
+		}
+		
+	    }
+}
+
+What is the difference between application context and BeanFactory ?
+
+Find Longest even numbered length word from a sentence.
+	public static void findLongestEvenWord(String sentence) {
+		//write your code here
+		int i = 0;
+		String[] starr = sentence.split(" ");
+		Map<String,Integer> mapEven = new HashMap<String,Integer>();
+
+		for(i=0;i<starr.length;i++) {
+			int num = starr[i].length();
+			if(num%2==0) {
+				mapEven.put(starr[i],num);
+			}
+		}
+		
+		String max = "";
+		String present ="";
+		int maxLength = 0;
+		int presentLength =0;
+		for(String key:mapEven.keySet()) {
+				present = key;
+				presentLength = mapEven.get(key);
+			 if(presentLength>maxLength) {
+				 maxLength = presentLength ;
+				 max = present;
+			 }
+		}	
+		System.out.print(max);
+	}
+}
+
+-Wipro & Synechron:
+   What is JIT ?
+   Where are static variables stored in Java memory area ?
+   What is Springboot command line runner ?
+   What is the difference between Future and CompletableFuture types ?
+   What is deadlock ? How can it be avoided ? 
+   What are Turbine drivers in Springboot ?
+   How Singleton class affects in multithreaded environment ? 
+   MultiThreading advanced concepts in Java.
+   Producer-consumer problem 
+   What is springboot-webflux ?
+
+   Junit playlist : https://www.youtube.com/watch?v=ZjZ20BgCL0o&list=PL6Zs6LgrJj3tE9xbgcz16sNbscYkrtce7&index=1

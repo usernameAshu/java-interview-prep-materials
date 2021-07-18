@@ -1,8 +1,8 @@
 Intro:
 Hi i am Ashutosh, from Kolkata. I have been working in the IT industry for the last 4.5 years. 
-I have worked on Java and Database administrator roles in Capgemini. 
-Then i have been working on microservice projects in Qburst as Java SE 8 developer. 
-I have worked on projects involving Logistics domain, Retail and e-commerce domain and Electric Vehicle connected service domain. 
+I have started as a Java and Database administrator roles in Capgemini. 
+Then i have been working on microservice projects in Qburst as Java SE 8 & SpringBoot developer. 
+I have worked on projects having domains of Logistics , Retail , e-commerce , and Electric Vehicle connected services. 
 
 Product based 
 
@@ -52,3 +52,14 @@ JIRA flow:
    Epics -> user Story -> Tasks -> Subtasks 
    In a sprint we are assigned few tasks.
    Tasks are divided into Subtasks assigned to individual members. 
+   User story generally depicts a feature which will deliver value to the end-user 
+
+   What is JIT ?
+   Where are static variables stored in Java memory area ?
+   What is Springboot command line runner ?
+   What is the difference between Future and CompletableFuture types ?
+   What is deadlock ? How can it be avoided ? 
+   What are SOLID principles ?
+   What are Turbine drivers in Springboot ?
+   How Singleton class affects in multithreaded environment ? 
+   MultiThreading advanced concepts in Java.

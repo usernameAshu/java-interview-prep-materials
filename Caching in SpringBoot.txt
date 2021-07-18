@@ -1,0 +1,18 @@
+Caching in SpringBoot (https://youtu.be/BhhJ11p86zM) 
+
+Annotations:
+@EnableCaching
+@Cacheable(cacheName, value, key)
+@CacheEvit 
+@CachePut 
+
+Cache is basically a key-value pair stored in memory 
+
+Using advanced cache: using ehcache in SpringBoot
+Add the maven dependency 
+ Add the custom java configuration for EHcache 
+ Creating multiple caches:
+ ten-second-cache
+ twenty-second-cache 
+ Attribute 'condition' in @Cacheable , the condition will trigger cache to happen
+ Annotation @CacheEvict with Attribute 'beforeInvocaton' 

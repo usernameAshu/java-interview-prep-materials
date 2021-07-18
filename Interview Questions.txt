@@ -289,8 +289,8 @@ Java Core Questions:
 
         TreeMap: 
             Implements SortedMap and NavigableMap interface
-            Insertion of elements is sorted 
-            Doesn't allow any NUll keys 
+            Insertion order of elements is sorted 
+            Null keys are not allowed 
             Sort is in natural ascending order 
 
         WeakHashmap:
@@ -409,7 +409,52 @@ Java Core Questions:
         When we create a new String literal ( String a ="ashutosh") , JVM searches for this literal in the String pool, If it finds a match
         then assigns that memory address to the reference variable. Else, it creates a new String literal in the String pool memory.
 
+    34. What are the different ways in which we can break the singleton design pattern for a Class ?
+        -Using Reflection API :
+            create a simple constructor and setAccessible(true)
+            constructor.createnewInstance() 
+        -Serialization: 
+            If the class is serialzed and again deserialized, then the hashcode is different from the original class
+        -Clonning 
+            It will create another object with different hashcode 
+
+    35. What is the difference ClassNotFOundException and NoClassDefFoundError?
+        -one is of Type Exception class and other is of Type Error class 
+        -ClassNotFOundException is a RuntimeException which is thrown when we are trying to load a class that doesnot exisit in our classpath 
+        -NoClassDefFoundError occurs when JVM is unable to locate the .class file required during runtime, but the .class file was present at compile time 
+
+    36. Which in-built class in java can be used as keys of HashMap , other than a custom Immutable object ?
+        -String, Byte, Float, Double 
     
+    36. Sort the list of employees in descending order: 
+        empList.stream()
+                .sorted( (e1,e2) -> e2.getSalary().compareTo(e1.getSalary()))
+                .collect(Collectors.toList())
+    
+    37. Fetch Top 3 salaried employees from the employee list: 
+         empList.stream()
+                .sorted( (e1,e2) -> e2.getSalary().compareTo(e1.getSalary()))
+                .limit(3)
+                .collect(Collectors.toList())
+    
+    38. Fetch all the salary having less than, 3rd highest salary.
+         empList.stream()
+                .sorted( (e1,e2) -> e2.getSalary().compareTo(e1.getSalary()))
+                .skip(3)
+                .collect(Collectors.toList())
+
+    39. Why char[] is preferred to String for password ? 
+        -Strings are Immutable objects, it gets stored in the String pool area which is a part of the heap memory
+        -the string is stored in this area untill it's garbage collected. 
+        -so even if we are done processing the password value, it might stay in the pool area (if any other has reference to it) for a long time
+        untill garbage collected. 
+        -this is a security threat, if anyone has access to memory dump, they can extract the sensitive information 
+
+        -but for charecter array: its a mutable object , 
+        -after processing the password value, when set to blank, the object value gets garbage collected
+        -also if you print the string reference and char[] reference, String wil print in plain text , while char[] reference will give a hashcode  
+
+
  Spring Boot AOP:
     1. Dependency for springboot:
     spring-boot-starter-aop
@@ -452,7 +497,7 @@ SpringBoot questions:
     @RequestParam : domain.com/orders?id=2 
     methodName(@RequestParam int id)
 
-    @Pathparam : domain.com/orders/{orderId}
+    @PathVariable : domain.com/orders/{orderId}
     methodName(@PathParam("orderId") int id)
 
     SpringBoot security implementation:
@@ -655,7 +700,22 @@ Hibernate Questions:
             @Cache(usage= READ_ONLY, region="")
             class Employee { }
 
+    Hibernate @Transactional annotation : attributes ? , scenario based questions ?
     Integrate Hibernate to existing Spring project : 
+        @Transactional attributes : 
+            propagaton (REQUIRED,SUPPORTS,MANDATORY)
+                -REQUIRED: Support a current transaction, create a new one if none exists.
+                -SUPPORTS: Support a current transaction, execute non-transactionally if none exists.
+                -REQUIRES_NEW: Create a new transaction, and suspend the current transaction if one exists.
+                -MANDATORY: Support a current transaction, throw an exception if none exists
+            isolation
+                -READ_UNCOMMITTED: constant indicating that dirty reads, non-repeatable reads and phantom reads can occur
+                -READ_COMMITTED : constant indicating that dirty reads are prevented; non-repeatable reads and phantom reads can occur.
+                -SERIALIZABLE: constant indicating that dirty reads, non-repeatable reads and phantom reads are prevented
+            timeout
+            rollbackFor 
+            readOnly 
+            value
 
     1.Entity life cycle states (Persistent Context): 
     New State  
