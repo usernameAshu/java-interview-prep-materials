@@ -1,0 +1,31 @@
+Kafka Tutorial :
+
+run kafka in docker environment: 
+
+Tutorial 1:
+https://youtu.be/2pBxoal7DY4
+docker compose file: https://gist.github.com/shabbirdwd53/d3b531d61379068da26d16487e37af34
+
+Tutorial 2:
+https://youtu.be/WnlX7w4lHvM
+
+Tutorial 3:
+https://youtu.be/8ZTTcAWMIAE
+Refer this to start the Kafka,zoopker and control centre services 
+Confluent docker images, nice UI to visualize kafka settings 
+
+Need to start Zookeper and Kafka services 
+
+
+When to use messaging queus and when to use rest template:
+
+Rest template: synchronous request-response design 
+
+kafka: when u batch processing and want to consume data through 
+    producer and consumer pattern and have events 
+
+Running the docker-compose-kafka.yaml file in E:\Apache Kafka PoC 
+Github link: https://github.com/confluentinc/cp-all-in-one/blob/6.1.1-post/cp-all-in-one/docker-compose.yml
+
+
+-------------------------------------------------------------------------------------------------------------------

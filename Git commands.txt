@@ -34,5 +34,35 @@ Connection details: (for hibernate-practice container)
 Name: bookstore
 URL: jdbc:mysql://localhost:3306/bookstore
 user: root 
-passwordL password 
+password: password 
 
+Connection details: (for hibernate-practice container)
+Name: chat
+URL: jdbc:mysql://localhost:3306/chat
+user: root 
+password: password 
+
+Connection details: (for hibernate-practice container)
+Name: chat
+URL: jdbc:mysql://localhost:3306/e_commerce
+user: root 
+password: password 
+
+
+Hibernate-core
+Datasource:
+hibernate.connection.driver_class
+hibernate.connection.url
+hibernate.connection.username
+hibernate.connection.password
+
+
+Properties:
+hibernate.show_sql
+hibernate.hbm2ddl.auto
+hibernate.dialect
+hibernate.connection.isolation
+hibernate.connection.autocommit
+
+Custom:
+packages.toScan

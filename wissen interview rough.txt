@@ -1,0 +1,151 @@
+Student stu = new ..
+
+List<Student> list 
+//Sort the students in first name
+
+list.stream().
+	.sort( comp )
+	.forEach(System.out::println);
+
+Comparator<Student> comp = (s1,s2) -> s1.getFirstName().comapareTo(s2.getFirstName());
+
+Collections.sort( comp );
+---------------------------
+public final class Person {
+ 	
+	//public cons
+	public Person() { }
+
+	private final String name
+	private	final List<String> degrees;
+
+	//no public setter, have private setters
+	//public getters
+	
+}
+
+class A {
+
+public void synchronized m1() {
+	 Thread.sleep(5000);
+	}
+}
+
+class Main() {
+
+ psvm {   
+	A obj1 = new A();
+	A obj2 = new A();
+
+	obj1.m1();
+	obj2.m1();	
+}
+}
+
+
+------------
+Parent 
+class Excercise { 
+ 	walk() {  }
+	run() { walk(); }
+}
+
+
+class Jogging extends Excercise  {
+@Override
+walk() { 
+super.walk();
+ }
+@Override
+run() {
+super.run();
+ }
+
+main() {
+Excercise  ex = new Jogging();
+ex.run();
+
+}
+}
+
+---EXECUTION----
+Parent cons
+Child cons
+Joggig - run() 
+Exercse - run();
+Excercise - walk();
+
+--------------
+List<Integers> listInt 
+//sum of squares of all Odd 
+
+int sumOddsqq=  listInt.stream()
+	.filter( i -> i%2!=0)
+	.map(i -> i*i)
+	.mapToInt( i -> i.intValue())
+	.sum();
+
+chmod 777
+r-w-x
+4-3-1
+
+chmod 764
+      U-X-O
+------
+bookAuthor ( book (primary_key), author)
+
+
+select author, count(*) noOfBooks
+from bookAuthor
+group by author
+having noOfBooks > 10;
+
+--------------
+n, k 
+5,3
+
+{ 1,4,5,8,10}
+1,4
+5,8
+
+int arr[] = new arr[n];
+for(i=0;i<n-1;i++) {
+    if(Math.abs(arr[i]-arr[i+1])==k) {
+	sout(arr[i],arr[i+1]);
+	}
+}
+
+n = 5;
+index: 0 1 2 3 4 
+for(0->3)
+
+-------------------
+String str = "absd fghur skskj";
+Longest even length word:
+
+String starr[] = str.spilt(" ");
+Map<String,Integer> map =...;
+
+for(String s:starr) {
+	if(s.length()%2==0) {
+		map.put(s,Integer.valueOf( s.length() ) )
+		}
+}
+
+/***
+absd,4
+ndnsds 6
+****/
+
+int maxlength = 0;
+String maxString = "";
+
+  for(String str: map.keySet() ) {
+	presentLength = map.get(str);
+	presentString = str;
+	
+	if(presentLength>maxlength) {
+		maxLength = presentLength;
+		maxString = presentString;
+}
+-----------------------------------------------

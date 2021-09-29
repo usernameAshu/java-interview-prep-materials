@@ -53,13 +53,3 @@ JIRA flow:
    In a sprint we are assigned few tasks.
    Tasks are divided into Subtasks assigned to individual members. 
    User story generally depicts a feature which will deliver value to the end-user 
-
-   What is JIT ?
-   Where are static variables stored in Java memory area ?
-   What is Springboot command line runner ?
-   What is the difference between Future and CompletableFuture types ?
-   What is deadlock ? How can it be avoided ? 
-   What are SOLID principles ?
-   What are Turbine drivers in Springboot ?
-   How Singleton class affects in multithreaded environment ? 
-   MultiThreading advanced concepts in Java.

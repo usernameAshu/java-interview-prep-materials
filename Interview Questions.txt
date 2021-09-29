@@ -80,7 +80,7 @@ Java Core Questions:
         When you have duplicate default methods in 2 interface. and a class is implementing the 2 interface. 
         Compile time error occurs, saying Duplicate default methods in 2 interface types. 
         Class can override the default method. If it has to access any implementationof Interface : Interfacename.super.methodName() 
-
+    
     11. Why static methods are used in Interface ?
         Earlier to access static methods we have to create Class 
         Creating class is a costly process. When a class is loaded it loads the 
@@ -420,7 +420,7 @@ Java Core Questions:
 
     35. What is the difference ClassNotFOundException and NoClassDefFoundError?
         -one is of Type Exception class and other is of Type Error class 
-        -ClassNotFOundException is a RuntimeException which is thrown when we are trying to load a class that doesnot exisit in our classpath 
+        -ClassNotFOundException is a checked exception which is thrown when we are trying to load a class that doesnot exisit in our classpath 
         -NoClassDefFoundError occurs when JVM is unable to locate the .class file required during runtime, but the .class file was present at compile time 
 
     36. Which in-built class in java can be used as keys of HashMap , other than a custom Immutable object ?
@@ -454,6 +454,11 @@ Java Core Questions:
         -after processing the password value, when set to blank, the object value gets garbage collected
         -also if you print the string reference and char[] reference, String wil print in plain text , while char[] reference will give a hashcode  
 
+
+    40. Wildcards in Generics: 
+        Unbounded Wildcards: List<?> represents a list of unknown type
+        Upper Bounded Wildcards: List<? extends Number> represents a list of Number or its sub-types such as Integer and Double
+        Lower Bounded Wildcards: List<? super Integer> represents a list of Integer or its super-types Number and Object
 
  Spring Boot AOP:
     1. Dependency for springboot:
