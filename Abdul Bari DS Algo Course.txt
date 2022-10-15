@@ -1,0 +1,217 @@
+1. Introduction:
+    
+    1. Stack vs Heap memory 
+
+        Main memory or RAM is divided into segments 
+        each segment is of 64KB 
+
+        When we are executing a program: 
+        each segment is again divided into 
+            -Code
+            -Stack 
+            -Heap 
+        
+    2. Time and Space Complexity: 
+        
+2. Recursion: 
+
+    Works on the principal of stack 
+    Tracing tree of Recursive function:
+
+        void main() {
+            int x = 3;
+            func(x);
+        }
+
+        void func(int n) {
+            if(n>0) {
+                print(n+10);
+                func(n-1);
+                print(n);
+            }
+        }
+
+        output: 13 12 11 1 2 3 
+
+            func(3)----3
+            /\
+           /  \
+          13   func(2)----2
+                /\
+               /  \
+              12   func(1)----1
+                      /\
+                     /  \
+                    11   func(0)
+                            |
+                            (no operations) 
+    
+    Time Complexity of Recursion: 
+    O(n) = n 
+
+    -Nested Recursion: 
+        int func(int n) {
+            if(n> 100) {
+                return n-10;
+            else
+                func( func(n+11) );
+            }
+        }
+
+    -Sum of Natural Numbers (n) using recursion: 
+        
+        1+2+3+4...+ (n-1) + n 
+
+        sum(n) = sum(n-1) + n; 
+
+        sum(n) ---> {     
+                        0               , n = 0
+                        sum(n-1) + n    , n > 0
+                    }
+
+        code: 
+        int sum(int n) {
+
+            if(n == 0)
+                return 0;
+            else 
+                return sum(n-1) + n;
+
+        }
+
+        Mathematical formula:
+        n(n+1)
+        ------
+          2
+
+
+        1.Recursion of fibonnaci :
+                Time Complexity : O(2^n)
+
+                fib(n) ---> {     
+                        0               , n = 0
+                        1               , n=1
+                        fib(n-2) + fib(n-1)    , n > 1
+                    }
+
+                int fib(int n) {
+	            	if( n <= 1) 
+	            		return n;
+	            	else 
+	            		return fib(n-2) + fib(n-1);
+	            }
+
+        2. Tower of Hanoi: 
+
+    3. Arrays 
+        Collection of similar elements
+
+        Static vs Dynamic array : 
+            static - array is created with fixed size 
+            Dynamic- array size is assigned at runtime 
+    
+    4. LinkedList 
+
+        we need a array which size will increase/decrease based on requirement 
+        variable size data-structure 
+
+        LinkedList are created in heap 
+
+        node : [data, next] 
+        next pointer points to a node : next --> node 
+
+        Traversing a LinkedList 
+
+        Searching in LinkedList:
+            -Linear search 
+            -Binary search 
+
+            Binary search not possible because we cannot start from middle 
+
+        Inserting a LinkedList
+            -Inserting at index 0 (before first node)
+            -Inserting at any Node 
+
+        Reversing a LinkedList
+            -Time Complexity:
+                 O(n) : using auxillary array 
+                 O(n) : using sliding pointers 
+
+                 Sliding node approach:
+                 //Sliding Node approach 
+		        Node<Integer> p = node1;
+	        	Node<Integer> q = null, r = null;
+		
+		        while( p!= null) {
+		        	r = q;
+		        	q = p;
+		        	p = p.next;
+		        	q.next = r;
+		        }
+
+        Deleting a Node: 
+            -Delting first node
+            -Using 2 pointers to delete any node after first node 
+
+    5. Doubly LinkedList
+
+        Node:  [prev, data, next]
+
+        -Inserting in a Doubly LinkedList:
+        while(initPos < insertPos-1) {
+			p = p.next;
+			initPos++;
+		}
+		
+		if(insertPos == 1) {
+			first =  newNode;
+		}
+		
+		newNode.next = p.next;
+		newNode.prev = p;
+		if(p.next != null) {
+			p.next.prev = newNode;
+		}
+		p.next = newNode;
+
+Trees: 
+
+    Collection of Nodes. One of the node is Root node.
+    Other nodes are disjoin subsets. Each subset is a tree 
+
+    -Root
+    -Nodes
+    -Edge 
+    -Vertices 
+    -Sub tree 
+    -Degree of a Node (number of child node under it)
+    -Leaf node ( zero degree nodes)
+    -Non leaf nodes 
+    -Level of tree 
+    -Height of tree 
+    -Forest 
+
+    Binary Tree: 
+
+        Tree of degree 2 
+        -Every Node can have 2 children nodes or less 
+
+        Number of Binary trees with N nodes 
+                2nCn        (2n! / n!n!) 
+        T(n) = -------- =   -----------
+                n + 1          n + 1
+
+
+        Traversals:
+            1. Preorder 
+            2. Inorder 
+            3. Postorder 
+            4. Level order 
+
+            Preorder:  root - left - right 
+            Inorder : left - root - right 
+            Postorder: left - right - root 
+            Levelorder: level by level 
+
+
+
