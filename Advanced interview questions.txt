@@ -2,6 +2,11 @@ https://youtu.be/PSAT-ORaQ-s
 1. Difference between Spring Framework and Spring Boot .
 
 2. Different scopes of Spring beans 
+    -singleton
+    -prototype
+    -request 
+    -session 
+    -application 
 
 3. What is the enhancement of hashmap implementation in java 8 ?
     Buckets containing a large number of colliding keys will store their entries in a balanced tree instead of a linked list 

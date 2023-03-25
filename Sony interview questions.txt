@@ -1,0 +1,90 @@
+What is Spirng Dispatcher Servlet :
+
+-Front congtroller for all the incoming requests
+-Delegates the requests to the appropriate controller 
+-Renders the appropriate views 
+-Integrated with Spring IoC container
+-It's a actual serlet , derives from HttpServlet class 
+
+Spring Handler mappings: 
+-It's a bean, to define which web requests should take which handlers/controllers 
+-in mappings tag we need to specify the url matchers to appropriate controller class 
+
+Eureka client 
+-In the client services we need to add @EnableEurekaClient 
+-In properties we need to mention the eureka server in eureka.client.serviceUrl.defaultZone )
+
+How to communicate with two different eureka servers ?
+-To make eureka server more resilient and available by runnigng multiple eureka servers 
+-Peer awareness
+-need to specify the eureka peers in serviceUrl (eureka.client.serviceUrl.defaultZone of peer1 should point to peer2( http://peer2/eureka/) , and vice versa)
+
+
+Circuit Breaker: Hystri clients 
+-To prevent cascading failures 
+-Include Hystrix by using @EnableCircuitBreaker 
+-Define a fallback method in service class which is annotated by @HystrixCommand( fallbackMethod = "")
+
+
+How to changes properties files at run time
+-Defining the configurations in outside app jar 
+-Using config-server to store all the common app properties 
+
+
+Config-sever in Spring: 
+This is used to reduce the boiler plate configurations in each apps. Also to change the configurations at runtime 
+We store all the common properties in a config-repository 
+Then from config-server-app we refer this config-repository to load the properties in server 
+cloud.config.server.git.uri={config-repo-url}
+cloud.config.server.git.clone-on-start=true
+Then in all the microservice in bootstrap.yml we need to refer to config-server-app 
+spring.cloud.config.uri={}
+
+
+Exception handling in SpringBoot microservice:
+Each service class' method can throw it's own Exception depending on the error 
+To give user a useful message when any operation goes wrong we need to modify the default exception respons from Spring 
+Create a Custom Error response class 
+Create a GlobalExceptionHandling class annotate with @ControllerAdvice  
+inside it, define methods for each custom exception 
+	@ExceptionHandler(value = NoSuchElementInDBException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public @ResponseBody ErrorResponse handNoSuchElementInDBException(NoSuchElementInDBException ex) {
+		return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+	}
+	
+This gives a very clean approach to handle responses of any exceptions throughout the app.
+
+https://www.geeksforgeeks.org/spring-boot-exception-handling/
+
+How to validate a request ?
+-Hibernate Validator
+-Define the validations inside the entity object
+-in controller method parameter @Valid @RequestBody CustomValidRequest re 
+To throw meaningful repsonse for any invalid request we can define a ExceptionHandler method in GlobalExceptionHandling class 
+with exception class : MethodArgumentNotValidException 
+
+Nth salary from table :
+We have to use dense_rank() function for this. 
+select * from
+	(select ename, sal, dense_rank() over(order by sal desc)r from Employee) 
+where r=&n;
+
+Spring Transactional 
+
+
+Maps 
+
+Sets 
+
+Trees 
+
+Authentication in Spring (JWT tokens) 
+
+Equals and Hashcode 
+
+https://www.geeksforgeeks.org/sorting-a-hashmap-according-to-values/
+
+
+Spring Boot validation with POST/GET Mock Rest template test cases 
+https://www.baeldung.com/spring-boot-bean-validation
