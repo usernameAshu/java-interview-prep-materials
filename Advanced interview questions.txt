@@ -219,6 +219,38 @@ Why in spring boot: using the command: mvn clean install, creates 2 jar files in
 What is git cherry pick ?
 
 What is Hibernate @Transactional Annotations ? And different types of Transactions that happen (Propagation, isolation) ?
+
+	In Spring Data JPA , we have a package: org.springframework.transaction.annotation 
+	This package has all the Database transaction oriented annotations 
+	
+	@Transactional: Defines the way of database transaction for the method-level or class level. This affects how a program writes data to database 
+	
+		Propagation :
+			REQUIRED
+			REQUIRES_NEW
+			SUPPORTS
+			NOT_SUPPORTED
+			MANDATORY
+			NEVER
+			NESTED
+			
+			
+		Isolation : Represents the isolation level of a transaction, this affects how the program reads data from database
+					Exclusively designed for use with {@link Propagation#REQUIRED} or {@link Propagation#REQUIRES_NEW} 
+			
+			DEFAULT : 
+			READ_UNCOMMITTED : A constant indicating that dirty reads, non-repeatable reads and phantom reads can occur
+			
+			READ_COMMITTED : A constant indicating that dirty reads are prevented; non-repeatable reads and phantom reads can occur
+			
+			REPEATABLE_READ :
+			
+			SERIALIZABLE:
+			
+			
+	
+	
+	
 what are the different level of propagaton ? What are the different levels of isolation ?
 What are idempotent methods in REST ?
  -HTTP methods which when called multiple times would impact the state of DB as it impacts for single time. 
