@@ -193,7 +193,6 @@ Remove large chunks of ArrayList elements while simultaneously adding it
 EmployeeList has list of employees, remove those employees who are over the age of 60 
 Or, example: in Cowin app, we are removing the double vaccinated people from database while adding people partially/never vaccinated
 
-In hibernate. @Transactional annotations 
 What happens when a order is going to be placed, but stock gets empty. 
 What can be done to reverse the order placed.
 
@@ -268,6 +267,33 @@ What is Hibernate @Transactional Annotations ? And different types of Transactio
 					Read committed			--			X					X
 					Repeatable read			--			--					X
 					Serializable			--			--					--
+					
+Database Normalization :
+
+1NF --> 5NF 
+Safety level increase --->
+
+	First Normal Form :
+		-Using row order to convey information is not permitted.
+		-Mixing datatype within a column is not permitted.
+		-Designing a table without a Primary key is not permitted.
+		-Storing a repeating group of data items in a single row is not permitted.
+		
+	Second Normal Form: 
+		-Each non-key attributes must depend on the entire Primary key attributes : each combination of primary keys 
+			should map to a single record of non-key attribute
+	
+	Third Normal Form :
+		-One non-key attribute's value should not be dependent on another non-key attribute in a table. i.e. Transitive dependency must be avoided. 
+		-So, every non-key attribute in a table should depend on the key , the whole key and nothing but the key. 
+	
+	Boyce-Codd normal form (BCNF) :	
+		-Every attribute in a table should depend on a key, the whole key and nothing but the key 
+	
+	Fourth Normal Form :
+		-
+		
+	
 			
 What are idempotent methods in REST ?
  -HTTP methods which when called multiple times would impact the state of DB as it impacts for single time. 
