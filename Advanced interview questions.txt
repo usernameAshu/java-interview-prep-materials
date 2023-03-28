@@ -218,6 +218,9 @@ Why in spring boot: using the command: mvn clean install, creates 2 jar files in
 
 What is git cherry pick ?
 
+	It is a commit process, where we can choose specific commit to push to the remote repository 
+
+what are the different level of propagaton ? What are the different levels of isolation ?
 What is Hibernate @Transactional Annotations ? And different types of Transactions that happen (Propagation, isolation) ?
 
 	In Spring Data JPA , we have a package: org.springframework.transaction.annotation 
@@ -225,33 +228,47 @@ What is Hibernate @Transactional Annotations ? And different types of Transactio
 	
 	@Transactional: Defines the way of database transaction for the method-level or class level. This affects how a program writes data to database 
 	
-		Propagation :
-			REQUIRED
-			REQUIRES_NEW
-			SUPPORTS
-			NOT_SUPPORTED
-			MANDATORY
-			NEVER
-			NESTED
+		Propagation : Defines the transaction execution process 
+		
+			REQUIRED : Supports a current transaction, creates a new one if none exists 
+			REQUIRES_NEW : Creates a new transaction, suspends a current transaction if exists 
+			SUPPORTS : Supports a current transaction, execute non-transactionally if none exists 
+			NOT_SUPPORTED : Execute non-transactionally, suspends a current transaction if exists 
+			MANDATORY : Supports a current transaction, throws exception if none exists 
+			NEVER : Execute non-transactionally, throws exception if transaction exists
+			NESTED : Execute within a nested transaction, if a current transaction exists
 			
 			
 		Isolation : Represents the isolation level of a transaction, this affects how the program reads data from database
 					Exclusively designed for use with {@link Propagation#REQUIRED} or {@link Propagation#REQUIRES_NEW} 
 			
-			DEFAULT : 
+			DEFAULT : Use the default isolation level of the underlying datastore.
 			READ_UNCOMMITTED : A constant indicating that dirty reads, non-repeatable reads and phantom reads can occur
-			
 			READ_COMMITTED : A constant indicating that dirty reads are prevented; non-repeatable reads and phantom reads can occur
+			REPEATABLE_READ : A constant indicating that dirty reads and non-repeatable reads are prevented, phantom reads can occure 
+			SERIALIZABLE: A constant indicating that dirty reads, non-repeatable reads and phantom reads are prevented
+		
+		Dirty Reads :
+			When 1st transaction writes a value to database , and before the transaction is committed, 2nd transaction reads the data from database. 
+			If the 1st transaction fails to commit, then the data read by 2nd transaction becomes a dirty read. 
 			
-			REPEATABLE_READ :
+		Non-Repeatable reads :
+			This occurs when a transaction reads the same row twice and gets back different values each time.
+			For example, suppose transaction-1 reads the row initially, then transaction-2 perfomrs a update/delete action
+			and commits the change. Now when transaction-1 reads the same row, it gets back a different value, or doesn't find the row at all. 
 			
-			SERIALIZABLE:
+		Phantom Reads :
+			A phantom row is a read that matches a query's search criteria, which is not initially seen. 
+			For example, suppose transaction-1 queries the database with a set of condition to retrieve 2 rows. Meanwhile, transaction-2 
+			performs a inserts & commits a new row which matches the conditions of transaction-1 query. Now when transaction-1 again re-executes 
+			the same query, it gets back 3 sets of rows. The 3rd row is the phantom read. 
 			
+		Transaction-isolation-level		Dirty-reads	Nonrepeatable-reads	Phantoms
+					Read uncommitted		X			X					X
+					Read committed			--			X					X
+					Repeatable read			--			--					X
+					Serializable			--			--					--
 			
-	
-	
-	
-what are the different level of propagaton ? What are the different levels of isolation ?
 What are idempotent methods in REST ?
  -HTTP methods which when called multiple times would impact the state of DB as it impacts for single time. 
  -GET, PUT are the idempotent methods in HTTP 
