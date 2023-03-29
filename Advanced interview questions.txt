@@ -269,13 +269,13 @@ What is Hibernate @Transactional Annotations ? And different types of Transactio
 					Serializable			--			--					--
 					
 Database Normalization :
-
+(Refer this tutorial: https://www.youtube.com/watch?v=GFQaEYEc8_8)
 1NF --> 5NF 
 Safety level increase --->
 
 	First Normal Form :
 		-Using row order to convey information is not permitted.
-		-Mixing datatype within a column is not permitted.
+		-Mixing datatypes within a same column is not permitted.
 		-Designing a table without a Primary key is not permitted.
 		-Storing a repeating group of data items in a single row is not permitted.
 		
@@ -291,8 +291,10 @@ Safety level increase --->
 		-Every attribute in a table should depend on a key, the whole key and nothing but the key 
 	
 	Fourth Normal Form :
-		-
-		
+		-Multivalued dependencies in a table must be multivalued dependencies on thekey
+	
+	Fifth Normal Form :
+		-The table (which already is in 4NF) cannot be logically describable by joining other tables together  
 	
 			
 What are idempotent methods in REST ?
