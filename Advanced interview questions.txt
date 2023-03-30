@@ -20,6 +20,36 @@ https://youtu.be/PSAT-ORaQ-s
     -joint point 
     -XML configuration implementation 
     -AspectJ implementation
+	
+	
+	Cross cutting concerns:
+		-Logging
+		-Transaction 
+		-Security
+		
+	Aspect Oriented programming is a different way of Programing than Object Oriented Programming or Function Oriented Programming 
+	Here we will create Aspects, instead of Objects or Functions 
+		-Logging Aspect 
+		-Transaction Aspect 
+		-Aspect configuration 
+		
+		Wrapping Aspects around methods: 
+		
+		[Aspect Code] ---> [Target method] ---> [Aspect Code] 
+		
+		Steps:
+		-Write the Aspects 
+		-Configure where the Aspects apply 
+		
+		All methods inside a Aspect class are advices :
+		Types of advices :
+			-Before 
+			-Pointcuts 
+			
+			-Wildcards 
+		
+		Class level annotation: @Aspect 
+		method level annotation: @Before()
 
 5. Garbage collection : What is MetaSpace ? How does it differ from PermGen ? 
     --Needs study 
