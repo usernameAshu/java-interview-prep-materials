@@ -43,13 +43,23 @@ https://youtu.be/PSAT-ORaQ-s
 		
 		All methods inside a Aspect class are advices :
 		Types of advices :
-			-Before 
-			-Pointcuts 
+			-Before : this advice will be printed 
+            -After : this advice will be printed if method throws any exception 
+            -AfterReturning : this advice will be printed if method excutes without any exception 
+            -AfterThrowing : this advice will be printed if method throws any exception 
+            -Around : this will print before and after executing the method , control is held be ProceedingJoinPoint type  
+			-Pointcuts : this are expression holders which can be used by the advices 
 			
-			-Wildcards 
+			-Wildcards : *
 		
 		Class level annotation: @Aspect 
 		method level annotation: @Before()
+
+        Expressions: 
+        "execution(* com.ibm.SpringConcepts.service.*.createDgwRequest())"
+        "within(com.ibm.SpringConcepts.service.RequestResponseImplService)"
+        "@annotation(com.ibm.SpringConcepts.aspect.Loggable)"
+        "args(name)"
 
 5. Garbage collection : What is MetaSpace ? How does it differ from PermGen ? 
     --Needs study 
@@ -60,18 +70,7 @@ https://youtu.be/PSAT-ORaQ-s
 
 6. What is a multi catch block ? (pipelining)
 
-7. Hibernate: List out benefits of CriteriaQuery in hibernate : 
-    --Another way for data retreival
-    -Writing the native sql in object oriented format 
-    -No performace benefit over HQL. 
 
-8. What are the types of Cascades supported in JPA ? 
-    -Persists: 
-    -Merge: 
-    -Detached: 
-    -Refresh: 
-    -Removed: 
-    -ALL: 
 
 9. What is Microservices ? Why we are using it ? 
     Microservice is a architectural style that structures application as a collection of services that are:
@@ -249,6 +248,128 @@ What is git cherry pick ?
 
 	It is a commit process, where we can choose specific commit to push to the remote repository 
 
+Hibernate Mappings : 
+
+    https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-one-mapping-example/
+
+    Two Entity class:
+    Library[id , name]
+    Address[id, location]
+
+    One to One mapping : 
+    1 Library can have only 1 Address 
+    Association is owned by Library 
+
+    @Entity
+    Library [
+    id, 
+    name, 
+
+    @OnetoOne
+    @JoinColumn(name = "address_id")
+    Address address; 
+    ]
+
+    @Entity
+    Address [
+    id, 
+    location,
+
+    @OneToOne(mappedBy = "address")
+    Library library;
+    ]
+
+
+    OneToMany mapping:
+    (Association cannot be owned by the Many {class} )
+    1 Address can have many Libraries 
+    Many Libraries can have 1 Address 
+    Association is owned by Address 
+
+    @Entity 
+    Address [
+    id, 
+    location, 
+
+    OneToMany
+    @JoinColumn(name= "library_id")
+    List<Library> libraries;
+    ]
+
+    @Entity
+    Library [
+    id,
+    name, 
+
+    @ManyToOne(mappedBy="library")
+    Address address;
+    ]
+
+    ManyToOne mapping:
+    Many Libraries can be mapped to 1 Address
+    Association is owned by Address 
+
+    @Entity 
+    Address [
+    id, 
+    location, 
+
+    @ManyToOne
+    @JoinColumn(name= "library_id")
+    Library library;
+    ]
+
+    @Entity
+    Library [
+    id,
+    name, 
+
+    @OneToMany(mappedBy="library")
+    List<Address> addresses;
+    ]
+
+
+    ManyToMany mapping:
+    Many Libraries can be present in Many Address 
+    Association is owned by Address 
+
+    @Entity
+    Address [
+    id, 
+    location, 
+
+    @ManyToMany
+    @JoinTable(
+    	name="address_library",
+    	joinColumns= @JoinColumn(name="library_id, referencedColumnName="id"),
+    	inverseJoinColumns = @JoinColumn(name="address_id", referencedColumnName="id")
+    	)
+    List<Library> libraries;
+    ]
+
+    @Entity
+    Library [
+    id, 
+    name, 
+
+    @ManyToMany(mappedBy="library")
+    List<Address> addresses;
+
+    ]
+
+7. Hibernate: List out benefits of CriteriaQuery in hibernate : 
+    --Another way for data retreival
+    -Writing the native sql in object oriented format 
+    -No performace benefit over HQL. 
+
+8. What are the types of Cascades supported in JPA ? 
+    -Persists: 
+    -Merge: 
+    -Detached: 
+    -Refresh: 
+    -Removed: 
+    -ALL: 
+
 what are the different level of propagaton ? What are the different levels of isolation ?
 What is Hibernate @Transactional Annotations ? And different types of Transactions that happen (Propagation, isolation) ?
 
@@ -418,3 +539,16 @@ Find Longest even numbered length word from a sentence.
    What is springboot-webflux ?
 
    Junit playlist : https://www.youtube.com/watch?v=ZjZ20BgCL0o&list=PL6Zs6LgrJj3tE9xbgcz16sNbscYkrtce7&index=1
+
+
+Spring Batch concepts :
+
+    It uses a TaskExecutor framework 
+
+    Job Launcher --> Job ------------> Step(s) ---> Item Reader 
+                 --> Job Repository                 Item Processor 
+                                                    Item Writer 
+
+    Official Documentation: 
+    https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
+     

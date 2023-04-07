@@ -460,7 +460,7 @@ Java Core Questions:
         Upper Bounded Wildcards: List<? extends Number> represents a list of Number or its sub-types such as Integer and Double
         Lower Bounded Wildcards: List<? super Integer> represents a list of Integer or its super-types Number and Object
 
- Spring Boot AOP:
+ Spring Boot AOP: (explained properly in Advanced Interview Questions file)
     1. Dependency for springboot:
     spring-boot-starter-aop
      <group-id>
