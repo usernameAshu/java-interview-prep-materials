@@ -543,6 +543,7 @@ Find Longest even numbered length word from a sentence.
 
 Spring Batch concepts :
 
+    Refer this github repo: https://github.com/usernameAshu/spring-batch-poc
     It uses a TaskExecutor framework 
 
     Job Launcher --> Job ------------> Step(s) ---> Item Reader 
@@ -552,3 +553,4 @@ Spring Batch concepts :
     Official Documentation: 
     https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
      
+    
