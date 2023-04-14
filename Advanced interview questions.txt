@@ -554,3 +554,20 @@ Spring Batch concepts :
     https://docs.spring.io/spring-batch/docs/current/reference/html/index.html
      
     
+Spring Security :
+
+    Secure by Default 
+
+    Principle of Least privilege 
+        -Error messages should be consisten for all wrong endpoints 
+        -401 unauthorized 
+
+    UserDetailsService bean 
+
+    Cross site Request Forgery (csrf token) : 
+        validates if the request is broken 
+        spring checks csrf token in the request header 
+        if csrf token doesn't matches actual-token, then request is blocked 
+    
+    Spring Security can give the name of the user logged in using SecurityContext 
+    Request Thread local pattern 
