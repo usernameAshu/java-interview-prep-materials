@@ -555,7 +555,8 @@ Spring Batch concepts :
      
     
 Spring Security :
-
+    Project: https://github.com/usernameAshu/two-factor-auth/commits/master
+    
     Secure by Default 
 
     Principle of Least privilege 
@@ -564,10 +565,43 @@ Spring Security :
 
     UserDetailsService bean 
 
+    Security architecture:
+        Filter --> AuthenticationManagers --> AuthenticationProviders --> JdbcManager --> UserDetailsService --> PasswordEncoder 
+        SecurityContext
+
     Cross site Request Forgery (csrf token) : 
         validates if the request is broken 
         spring checks csrf token in the request header 
         if csrf token doesn't matches actual-token, then request is blocked 
+
+    Cross Origin Resource Sharing 
     
     Spring Security can give the name of the user logged in using SecurityContext 
     Request Thread local pattern 
+
+    Oauth 2 security: 
+
+        -User maangement config 
+        -Client configuration 
+        -Grant types 
+
+        Password grant type: 
+            1. User tries to access any protected resource from Client 
+            2. Client asks User to enter the credentials 
+            3. User enters username/password in the Client 
+            4. Client passes this info to Authorization Server to get the access tokens 
+            5. Client receives the token from Authorization server 
+            /oauth/token?grant_type=password&username=root&password=1234&scope=read 
+
+        Authorization Code grant type: 
+            1. User tries to access any protected resource from Client
+            2. Client redirects the User to Authorization server      
+            /oauth/authorize?response_type=code&client_id=client1&scope=read 
+            5. Authorization Server asks User to enter credentials in a Login Page 
+            6. User enters the credentials
+            7. Authorization server sends "authorization code" to the redirect endpoint 
+            localhost:9090/?code=6yris7d8czy
+            (http/localhost:9090 was the redirect url)
+            8. Client uses this authorization code and sends a token request 
+            /oauth/token?grant_type=authorization_code&scope=read&code=6yris7d8czy
+            9. Client gets the access token details 
