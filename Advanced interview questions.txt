@@ -590,13 +590,15 @@ Spring Security :
             2. Client asks User to enter the credentials 
             3. User enters username/password in the Client 
             4. Client passes this info to Authorization Server to get the access tokens 
-            5. Client receives the token from Authorization server 
             /oauth/token?grant_type=password&username=root&password=1234&scope=read 
-
+            (provides client id & secret in Http Basic AUth)
+            5. Client receives the token from Authorization server 
+            
         Authorization Code grant type: 
             1. User tries to access any protected resource from Client
             2. Client redirects the User to Authorization server      
             /oauth/authorize?response_type=code&client_id=client1&scope=read 
+            (provides client id & secret in Http Basic AUth)
             5. Authorization Server asks User to enter credentials in a Login Page 
             6. User enters the credentials
             7. Authorization server sends "authorization code" to the redirect endpoint 
@@ -604,4 +606,19 @@ Spring Security :
             (http/localhost:9090 was the redirect url)
             8. Client uses this authorization code and sends a token request 
             /oauth/token?grant_type=authorization_code&scope=read&code=6yris7d8czy
+            (provides client id & secret in Http Basic AUth)
             9. Client gets the access token details 
+            10. Client can call the protected resources with the access tokens 
+
+        Client credentials grant type:
+            This is the simplest of all flow.
+            This is used to validate/authenticate any service 
+            1. Client sends client id & secret to Authorization server's token endpoint 
+            oauth/token?grant_type=client_credentials&scope=read
+            (provides client id & secret in Http Basic AUth)
+            2. Authorization Server sends back a access token 
+             
+        Refresh Token grant type: 
+            Every access token has a expires_in time, when that expiry time crosses, user will be logged out. 
+            But if the Client wants to re-authenticate the User without entering the credentials again, it will use the refresh_token received earlier
+            oauth/token?grant_type=refresh_token&token=
