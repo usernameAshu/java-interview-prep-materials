@@ -597,10 +597,10 @@ Spring Security :
         Authorization Code grant type: 
             1. User tries to access any protected resource from Client
             2. Client redirects the User to Authorization server      
-            /oauth/authorize?response_type=code&client_id=client1&scope=read 
-            (provides client id & secret in Http Basic AUth)
+            http://localhost:8080/oauth/authorize?response_type=code&client_id=android8&scope=user 
+            (DOES NOT provide client id & secret in Http Basic AUth)
             5. Authorization Server asks User to enter credentials in a Login Page 
-            6. User enters the credentials
+            6. User enters the credentials of username & password as stored in DB (users table) 
             7. Authorization server sends "authorization code" to the redirect endpoint 
             localhost:9090/?code=6yris7d8czy
             (http/localhost:9090 was the redirect url)
@@ -610,15 +610,75 @@ Spring Security :
             9. Client gets the access token details 
             10. Client can call the protected resources with the access tokens 
 
+        Implicit Token grant flow: 
+            1. User tries to access any protected resources 
+            2. Client redirects user to authorization server:
+            http://localhost:8080/oauth/authorize?response_type=token&client_id=oppo&scope=write
+            (DOES NOT provide client id & secret in Http Basic AUth)
+            3. One thing to notice, this is similar to authorization_code flow, with response_type as token 
+            4. Authorization server redirects user to /login page 
+            5. User enters the user-credentials 
+            6. Authorization server asks User to confirm to authorize request made by the client 
+            7. Authorization server sends "access tokens" to the redirect endpoint 
+            http://localhost:9090/#access_token=XXX8889999-R1CWeAk6keS24k6NCjAho&token_type=bearer&expires_in=4999&jti=34a665e1-0740-4214-9780-677c60e4ce72
+            8. Another difference with the authorization_code flow is that, client donot have to pass the Client-id & secret in order to receive the access token 
+
         Client credentials grant type:
             This is the simplest of all flow.
             This is used to validate/authenticate any service 
             1. Client sends client id & secret to Authorization server's token endpoint 
-            oauth/token?grant_type=client_credentials&scope=read
+            /oauth/token?grant_type=client_credentials&scope=read
             (provides client id & secret in Http Basic AUth)
             2. Authorization Server sends back a access token 
-             
+            
         Refresh Token grant type: 
             Every access token has a expires_in time, when that expiry time crosses, user will be logged out. 
             But if the Client wants to re-authenticate the User without entering the credentials again, it will use the refresh_token received earlier
-            oauth/token?grant_type=refresh_token&token=
+            /oauth/token?grant_type=refresh_token&token=
+
+
+            Issue faced and Solution:
+                Couldnot produce the refresh tokens. Whenever we are trying to refresh the access tokens it showing error 
+
+            http://localhost:8080/oauth/token?grant_type=refresh_token&token=2f92c8b4-40bd-4b1e-af33-e96b7080bbb9
+
+                TokenEndpoint.postAccessToken(..) -> DefaultOauth2RequestFactory.createTokenRequest(..)
+                -> DefaultTokenServices.refreshAccessToken(String, TokenRequest)
+
+                Throwing IllegalArguementException : UserDetailsService is required.
+
+            Solution: 
+                StackOverFlowE link: https://stackoverflow.com/questions/60385723/oauth2-java-lang-illegalstateexception-userdetailsservice-is-required-with-r
+
+               I found that there is a "local" AuthenticationManagerBuilder and a "global" AuthenticationManagerBuilder and 
+               we need to set it on the global version in order to have this information passed to these other builder contexts.
+
+                So, the solution I came up with was to get the "global" version in the same way the other contexts were 
+                getting the global version. Inside my WebSecurityConfigurerAdapter I had the following:
+
+                @Autowired
+                public void setApplicationContext(ApplicationContext context) {
+                    super.setApplicationContext(context);
+                    AuthenticationManagerBuilder globalAuthBuilder = context
+                            .getBean(AuthenticationManagerBuilder.class);
+                    try {
+                        globalAuthBuilder.userDetailsService(userDetailsService);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+Authentication attempt using org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider
+
+    All hasRole("xxx") validations happen in SecurityExpressionOperations class (implemented by SecurityExpressionRoot)
+
+    Classes responsible for generating tokens for the below Grant types:
+    Password : ResourceOwnerPasswordTokenGranter.java
+    authorization_code : AuthorizationCodeTokenGranter.java 
+    refresh_token: RefreshTokenGranter.java 
+
+        JWT tokens:
+            We will use TokenStore from Spring security 
+            TokenStore needs a Converter 
+            Both TokenStore and Converter needs to be added to the endpoints configurer 
