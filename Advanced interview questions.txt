@@ -590,7 +590,7 @@ Spring Security :
             2. Client asks User to enter the credentials 
             3. User enters username/password in the Client 
             4. Client passes this info to Authorization Server to get the access tokens 
-            /oauth/token?grant_type=password&username=root&password=1234&scope=read 
+            http://localhost:8080/oauth/token?grant_type=password&username=root&password=1234&scope=read 
             (provides client id & secret in Http Basic AUth)
             5. Client receives the token from Authorization server 
             
@@ -602,7 +602,7 @@ Spring Security :
             5. Authorization Server asks User to enter credentials in a Login Page 
             6. User enters the credentials of username & password as stored in DB (users table) 
             7. Authorization server sends "authorization code" to the redirect endpoint 
-            localhost:9090/?code=6yris7d8czy
+            http://localhost:9090/?code=6yris7d8czy
             (http/localhost:9090 was the redirect url)
             8. Client uses this authorization code and sends a token request 
             /oauth/token?grant_type=authorization_code&scope=read&code=6yris7d8czy
@@ -622,12 +622,13 @@ Spring Security :
             7. Authorization server sends "access tokens" to the redirect endpoint 
             http://localhost:9090/#access_token=XXX8889999-R1CWeAk6keS24k6NCjAho&token_type=bearer&expires_in=4999&jti=34a665e1-0740-4214-9780-677c60e4ce72
             8. Another difference with the authorization_code flow is that, client donot have to pass the Client-id & secret in order to receive the access token 
+                This makes implicit grant flow very insecure to use 
 
         Client credentials grant type:
             This is the simplest of all flow.
             This is used to validate/authenticate any service 
             1. Client sends client id & secret to Authorization server's token endpoint 
-            /oauth/token?grant_type=client_credentials&scope=read
+            http://localhost:8080/oauth/token?grant_type=client_credentials&scope=read
             (provides client id & secret in Http Basic AUth)
             2. Authorization Server sends back a access token 
             
@@ -682,3 +683,12 @@ Authentication attempt using org.springframework.security.web.authentication.pre
             We will use TokenStore from Spring security 
             TokenStore needs a Converter 
             Both TokenStore and Converter needs to be added to the endpoints configurer 
+
+
+    How Resource server know the Access token is Valid ?
+        Introspection endpoint: 
+        /oauth/check_token?token=
+
+        Token can be of 2 types: 
+        1. Opaque Token (normal random geenrated string)
+        2. JWT token (token string having a header body and signature)
