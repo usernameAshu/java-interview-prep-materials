@@ -692,3 +692,106 @@ Authentication attempt using org.springframework.security.web.authentication.pre
         Token can be of 2 types: 
         1. Opaque Token (normal random geenrated string)
         2. JWT token (token string having a header body and signature)
+
+
+Paths in Java NIO: 
+
+    Normalization of path :
+     /**
+		 * a/b/c/././././d/../../c ->
+		 * We can remove {./} when we see it after any directory
+		 * So removing {././././}
+		 * a/b/c/d/../../c
+		 * When we have parent directory {../} after any folder, we can remove that folder and {../}
+		 * So removing {d/../} , in same way removing others {c/../}
+		 * a/b/c  => This is the normalized path 
+		 */
+
+    /**
+		 * When we have relative path : a/../../../b 
+		 * Then as per the rules : {a/../} will be removed, but since we don't know what's before the relative path
+		 * the other "previous directory" command will be kept intact:
+		 * Normalized path: after removing { a/../}
+		 * ../../b
+		 * 
+		 * For absolute path : /a/../../../b 
+		 * We will remove: {a/../}, {/../}, {/..} 
+		 * Normalized path:
+		 * /b
+		 */
+
+    Relativize path:
+
+        Both of the paths should be of the same type 
+
+
+Serialization :
+
+    Serialization is a process of converting Java objects into bytes. Later this bytes can be streamed and stored in a file.
+    Normally this files cannot be read by a text editor 
+    This file can only be read via a Java app which will be able to deserialize the file and make it readable 
+
+    This is a reason why apps nowadays have moved from Serialization to transacting data via XML or JSON 
+    Since a Java app when converts a object into a JSON file and sends it over the network , 
+    another Python app can read the JSON file. So, it makes language independent. 
+
+    But since serialization is an important concept, we can find it in earlier legacy apps and OCP exam 
+
+
+Java Command line execute command:
+    (How to run Java programs by writing in a Notepad)
+    
+    java  -classpath "C:\Users\002L2N744\Documents\RTEST-applications-docs\production-code\proof-of-concepts\1Z0-819\bin" file_nio_io.serialization._2
+
+    Another example:
+
+    I created a java class Driver in this location : 
+    C:\Users\002L2N744\Documents\Learning-and-Development\Test java cmd\com\src
+
+    My java class package declaration is:
+    package com.src;
+
+    Execute statement:
+    java -classpath "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd" com.src.Driver
+
+
+    For class which have external jars added: 
+    We have a Driver class which is using a class from sum.jar 
+    Below is the execute command :
+
+    java -classpath "{path-to-class-files};{path-of-the-external-jar} com.something.Main-class 
+
+    java -classpath 
+    "C:\Users\002L2N744\Documents\RTEST-applications-docs\production-code\proof-of-concepts\Test-Jars-Project\bin;
+    C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" 
+    com.test.Driver
+
+
+    Compiling and placing class-files in a different directory & then executing the classfile :
+    Driver.java is created in 
+    C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src
+
+    Step 1: compiling the program, from the Java class directory: 
+            -d denotes where we want to save the classfiles
+            If the class uses package systems, directories will be created in the output folder  
+
+        Location: C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src
+        javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" Driver.java
+
+        Location: Anywhere 
+        javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" 
+        C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\Driver.java
+
+    Step 2: Executing the java program from anywhere in PC, by setting CLASSPATH: 
+
+        Location: Anywhere 
+        java -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" com.src.Driver
+
+
+    When your class have external jar dependency :
+
+    Step 1: Compile using the Jar dependencies:
+    javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" -cp "C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\Driver.java
+
+    Step 2: Run the program using the Jar depencies:
+    java -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin;C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" com.src.Driver
