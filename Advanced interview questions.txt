@@ -738,7 +738,7 @@ Serialization :
     But since serialization is an important concept, we can find it in earlier legacy apps and OCP exam 
 
 
-Java Command line execute command:
+Java Command line Compilation & Execution :
     (How to run Java programs by writing in a Notepad)
     
     java  -classpath "C:\Users\002L2N744\Documents\RTEST-applications-docs\production-code\proof-of-concepts\1Z0-819\bin" file_nio_io.serialization._2
@@ -790,8 +790,29 @@ Java Command line execute command:
 
     When your class have external jar dependency :
 
-    Step 1: Compile using the Jar dependencies:
-    javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" -cp "C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\Driver.java
+        Step 1: Compile using the Jar dependencies:
+        javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" -cp "C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\Driver.java
 
-    Step 2: Run the program using the Jar depencies:
-    java -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin;C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" com.src.Driver
+        Step 2: Run the program using the Jar depencies:
+        java -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin;C:\Users\002L2N744\Documents\Learning-and-Development\OCA 1Z0-819\test-jars\sum.jar" com.src.Driver
+
+    When class have multiple dependencies :
+
+        We created a class WebDrvier.java inside package : com.src.web and in location: C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\web
+        We want the classfiles (bytecodes) to be stored at : C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin
+
+        Compiler: 
+        javac -d "" -cp "" C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\web\WebDriver.java
+
+            -d: location where we want to place the class files 
+            -cp : location of any external dependencies 
+
+        javac -d "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin" -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\jars\*" C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\com\src\web\WebDriver.java
+
+
+        Execution: 
+        java -cp "" com.src.web.WebDriver
+
+            -cp : location of the class file bin folder & location of the external jars 
+
+        java -cp "C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\bin;C:\Users\002L2N744\Documents\Learning-and-Development\Test-java-cmd\jars\*" com.src.web.WebDriver
