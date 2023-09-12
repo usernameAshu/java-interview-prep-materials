@@ -404,6 +404,14 @@ Java Core Questions:
         Immutable class,
         holds alphanumeric charecters 
 
+    How to make a Class Immutable ?
+        -Declare the class as final, so that it cannot be extended 
+        -Declare all fields as private 
+        -Initialize all fields using parameterized constructor, and perform a deep cloning 
+        -Class should not have any setter methods, only public getter methods 
+        -Declare all getter as public, If class has referenced object field, donot send direct Object
+        reference in getter, send a cloned copy of the object. 
+
     String Pool: 
         Special memory area in heap which stores String literals.
         When we create a new String literal ( String a ="ashutosh") , JVM searches for this literal in the String pool, If it finds a match
@@ -461,7 +469,8 @@ Java Core Questions:
         Lower Bounded Wildcards: List<? super Integer> represents a list of Integer or its super-types Number and Object
 
     41. Iterate over a HasMap :
-
+         Map<String,String> map = new HashMap<>();
+         map.entrySet().stream().forEach(entry -> System.out.println(entry.getKey() + "," + entry.getValue()));
     
 
  Spring Boot AOP: (explained properly in Advanced Interview Questions file)

@@ -1,0 +1,20 @@
+{
+    "client_id" : "android-app-1",
+    "client_secret" : "password",
+    "resource_ids" : [ "" , "" ],
+    "authorized_grant_types" : ["password" ],
+    "redirect_uri" : ["http://localhost:9090"],
+    "autoapprove" : [""],
+    "access_token_validity" : 5000 ,
+    "refresh_token_validity" : 50000
+}
+
+{
+    "username" : "",
+    "password" : "",
+    "authorities" : [ "", ""],
+    "accountNonExpired" : true,
+    "accountNonLocked" : true ,
+    "credentialsNonExpired" : true,
+    "enabled" : true
+}

@@ -1,0 +1,55 @@
+two-factor-auth app:
+
+    Configuration class extends WebSecurityConfigurerAdapter class 
+    Override the method configure(HttpSecurity _)
+        -Here were add the csrf policy, http basic, and any custom filters 
+        -You also authorize requests with any specific antmatchers for it 
+
+    Override the method configure(AuthenticationManagerBuilder _) 
+        -you add all the custom authentication providers you have declared 
+    
+    Create  a Bean of JdbcUserDetailsManager passing the Datasource as parameter 
+
+    Override the authenticationManagerBean() and annotate it as a Bean -> creating a bean of AuthenticationManager
+
+    JdbcUserDetailsManager creates the user in the database --> by taking in the UserDetails object 
+     it inserts data into User and Authorities table 
+
+    Username password: ashutosh:password , anuja:password , john:password
+
+
+authorization-server app: 
+
+    table: oauth_client_details
+    
+    JdbcClientDetailsService inserts the ClientDetails into  (oauth_client_details) table 
+
+    private static final String DEFAULT_INSERT_STATEMENT = "insert into oauth_client_details (" + CLIENT_FIELDS
+			+ ", client_id) values (?,?,?,?,?,?,?,?,?,?,?)";
+
+
+        CLIENT_FIELDS = "client_secret, " + CLIENT_FIELDS_FOR_UPDATE;
+
+        CLIENT_FIELDS_FOR_UPDATE = "resource_ids, scope, "
+			+ "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
+			+ "refresh_token_validity, additional_information, autoapprove";
+
+
+            CREATE TABLE `spring_db`.`oauth_client_details` (
+  `client_id` VARCHAR(45) NOT NULL,
+  `client_secret` VARCHAR(225) NULL,
+  `resource_ids` VARCHAR(45) NULL,
+  `scope` VARCHAR(45) NULL,
+  `authorized_grant_types` VARCHAR(45) NULL,
+  `web_server_redirect_uri` VARCHAR(45) NULL,
+  `authorities` VARCHAR(45) NULL,
+  `access_token_validity` INT NULL,
+  `refresh_token_validity` INT NULL,
+  `autoapprove` VARCHAR(45) NULL,
+  'additional_information' VARCHAR(45) NULL
+  PRIMARY KEY (`client_id`));
+
+    For creating user the jdbc query is:
+    insert into users (username, password, enabled) values (?,?,?)
+
+    insert into authorities (username, authority) values (?,?)

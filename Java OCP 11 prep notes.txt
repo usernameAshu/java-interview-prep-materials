@@ -1,0 +1,47 @@
+Paths in Java NIO: 
+
+    Normalization of path :
+     /**
+		 * a/b/c/././././d/../../c ->
+		 * We can remove {./} when we see it after any directory
+		 * So removing {././././}
+		 * a/b/c/d/../../c
+		 * When we have parent directory {../} after any folder, we can remove that folder and {../}
+		 * So removing {d/../} , in same way removing others {c/../}
+		 * a/b/c  => This is the normalized path 
+		 */
+
+    /**
+		 * When we have relative path : a/../../../b 
+		 * Then as per the rules : {a/../} will be removed, but since we don't know what's before the relative path
+		 * the other "previous directory" command will be kept intact:
+		 * Normalized path: after removing { a/../}
+		 * ../../b
+		 * 
+		 * For absolute path : /a/../../../b 
+		 * We will remove: {a/../}, {/../}, {/..} 
+		 * Normalized path:
+		 * /b
+		 */
+
+    Relativize path:
+
+        Both of the paths should be of the same type 
+
+
+Serialization :
+
+    Serialization is a process of converting Java objects into bytes. Later this bytes can be streamed and stored in a file.
+    Normally this files cannot be read by a text editor 
+    This file can only be read via a Java app which will be able to deserialize the file and make it readable 
+
+    This is a reason why apps nowadays have moved from Serialization to transacting data via XML or JSON 
+    Since a Java app when converts a object into a JSON file and sends it over the network , 
+    another Python app can read the JSON file. So, it makes language independent. 
+
+    But since serialization is an important concept, we can find it in earlier legacy apps and OCP exam 
+
+
+    Java Command line execute command:
+    
+    java  -classpath "C:\Users\002L2N744\Documents\RTEST-applications-docs\production-code\proof-of-concepts\1Z0-819\bin" file_nio_io.serialization._2

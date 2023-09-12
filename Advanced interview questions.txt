@@ -334,7 +334,7 @@ Hibernate Mappings :
     Association is owned by Address 
 
     @Entity
-    Address [
+    Address {
     id, 
     location, 
 
@@ -345,17 +345,17 @@ Hibernate Mappings :
     	inverseJoinColumns = @JoinColumn(name="address_id", referencedColumnName="id")
     	)
     List<Library> libraries;
-    ]
+    }
 
     @Entity
-    Library [
+    Library {
     id, 
     name, 
 
-    @ManyToMany(mappedBy="library")
+    @ManyToMany(mappedBy="libraries")
     List<Address> addresses;
 
-    ]
+    }
 
 7. Hibernate: List out benefits of CriteriaQuery in hibernate : 
     --Another way for data retreival
@@ -377,9 +377,10 @@ What is Hibernate @Transactional Annotations ? And different types of Transactio
 	This package has all the Database transaction oriented annotations 
 	
 	@Transactional: Defines the way of database transaction for the method-level or class level. This affects how a program writes data to database 
-	
-		Propagation : Defines the transaction execution process 
-		
+	Example: @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
+
+		Propagation : Defines the transaction execution process. Below are the propagaton strategies:
+    
 			REQUIRED : Supports a current transaction, creates a new one if none exists 
 			REQUIRES_NEW : Creates a new transaction, suspends a current transaction if exists 
 			SUPPORTS : Supports a current transaction, execute non-transactionally if none exists 
@@ -398,26 +399,26 @@ What is Hibernate @Transactional Annotations ? And different types of Transactio
 			REPEATABLE_READ : A constant indicating that dirty reads and non-repeatable reads are prevented, phantom reads can occure 
 			SERIALIZABLE: A constant indicating that dirty reads, non-repeatable reads and phantom reads are prevented
 		
-		Dirty Reads :
-			When 1st transaction writes a value to database , and before the transaction is committed, 2nd transaction reads the data from database. 
-			If the 1st transaction fails to commit, then the data read by 2nd transaction becomes a dirty read. 
-			
-		Non-Repeatable reads :
-			This occurs when a transaction reads the same row twice and gets back different values each time.
-			For example, suppose transaction-1 reads the row initially, then transaction-2 perfomrs a update/delete action
-			and commits the change. Now when transaction-1 reads the same row, it gets back a different value, or doesn't find the row at all. 
-			
-		Phantom Reads :
-			A phantom row is a read that matches a query's search criteria, which is not initially seen. 
-			For example, suppose transaction-1 queries the database with a set of condition to retrieve 2 rows. Meanwhile, transaction-2 
-			performs a inserts & commits a new row which matches the conditions of transaction-1 query. Now when transaction-1 again re-executes 
-			the same query, it gets back 3 sets of rows. The 3rd row is the phantom read. 
-			
-		Transaction-isolation-level		Dirty-reads	Nonrepeatable-reads	Phantoms
-					Read uncommitted		X			X					X
-					Read committed			--			X					X
-					Repeatable read			--			--					X
-					Serializable			--			--					--
+    Dirty Reads :
+        When 1st transaction writes a value to database , and before the transaction is committed, 2nd transaction reads the data from database. 
+        If the 1st transaction fails to commit, then the data read by 2nd transaction becomes a dirty read. 
+        
+    Non-Repeatable reads :
+        This occurs when a transaction reads the same row twice and gets back different values each time.
+        For example, suppose transaction-1 reads the row initially, then transaction-2 perfomrs a update/delete action
+        and commits the change. Now when transaction-1 reads the same row, it gets back a different value, or doesn't find the row at all. 
+        
+    Phantom Reads :
+        A phantom row is a read that matches a query's search criteria, which is not initially seen. 
+        For example, suppose transaction-1 queries the database with a set of condition to retrieve 2 rows. Meanwhile, transaction-2 
+        performs a inserts & commits a new row which matches the conditions of transaction-1 query. Now when transaction-1 again re-executes 
+        the same query, it gets back 3 sets of rows. The 3rd row is the phantom read. 
+        
+    Transaction-isolation-level		Dirty-reads	Nonrepeatable-reads	Phantoms
+                Read uncommitted		X			X					X
+                Read committed			--			X					X
+                Repeatable read			--			--					X
+                Serializable			--			--					--
 					
 Database Normalization :
 (Refer this tutorial: https://www.youtube.com/watch?v=GFQaEYEc8_8)
@@ -585,6 +586,8 @@ Spring Security :
         -Client configuration 
         -Grant types 
 
+    OAUTH 2 Grant types: 
+
         Password grant type: 
             1. User tries to access any protected resource from Client 
             2. Client asks User to enter the credentials 
@@ -605,7 +608,7 @@ Spring Security :
             http://localhost:9090/?code=6yris7d8czy
             (http/localhost:9090 was the redirect url)
             8. Client uses this authorization code and sends a token request 
-            /oauth/token?grant_type=authorization_code&scope=read&code=6yris7d8czy
+            http://localhost:8080/oauth/token?grant_type=authorization_code&scope=read&code=6yris7d8czy
             (provides client id & secret in Http Basic AUth)
             9. Client gets the access token details 
             10. Client can call the protected resources with the access tokens 
@@ -627,10 +630,11 @@ Spring Security :
         Client credentials grant type:
             This is the simplest of all flow.
             This is used to validate/authenticate any service 
-            1. Client sends client id & secret to Authorization server's token endpoint 
+            1. Client sends request to Identity Provider's token endpoint 
             http://localhost:8080/oauth/token?grant_type=client_credentials&scope=read
             (provides client id & secret in Http Basic AUth)
             2. Authorization Server sends back a access token 
+            3. Client uses this token to access the protected resource. 
             
         Refresh Token grant type: 
             Every access token has a expires_in time, when that expiry time crosses, user will be logged out. 
