@@ -1,0 +1,48 @@
+1. candidate background and experience
+2. Scenario question on Java and Spring Boot
+2a: Lets assume you need a fast and reliable storage and retrieval system for a critical application. What database would you choose and why?
+3. There's a application, which has to publish records to database, and it crashes after every 10 records. 
+How to provide a more robust solution to this problem , so that the data pushed to the DB over the network is not lost.
+(Messaging bus solution)
+4. More Messaging queue problems, if cosumer crashes after consuming 'n' records, how it can start from 'n+1' record after restart.
+5. How to handle a situation, there are 5 messages in a queue. 
+Consumer has successfully consumed the first 3 messages and then crashes which consuming and processing the 4th message 
+After restart, consumer has to make sure it again fetches the 4th message from the topic. Since, topic will try to push the 
+5th message from the queue. Since, for the topic, 4th message is already consumed. How to handle this situation.
+
+6. One programming question: 
+Code was pre-written, i had to refactor the code. 
+Problem statement: 
+There is a OrderCreator service, which is responsible for creating orders for a customer. The order is about 
+a stock instrument purchase. It contains the instrument name, price, quantity. 
+The OrderCreator class has a method createOrder, which takes price, quantity as input. It returns a Order object.
+The OrderCreator class has a parameterized constructor, which takes the instrument name as input.
+
+So, in order to create a Order there are many rules to be followed. So, how to refactor the code to make it more 
+readable and maintainable and scalable which can support millions of stock orders. 
+
+Answer: 
+1. I have 5 years of experience in Java and Spring Boot. I have worked on various projects and have experience 
+in developing and maintaining applications using Java and Spring Boot. I have also worked on database management 
+and have experience in handling large amounts of data.
+
+2. I would choose a relational database like MySQL or PostgreSQL 
+for a fast and reliable storage and retrieval system for a critical application. 
+These databases are known for their reliability, performance, and scalability. 
+They also have strong support for ACID transactions, which is important for critical applications.
+
+3. To provide a more robust solution for the application that crashes after every 10 records, 
+I would implement a messaging queue system using a technology like Apache Kafka or RabbitMQ. 
+This would allow the application to publish records to the queue, 
+and a separate consumer can consume the records and push them to the database. 
+This way, even if the application crashes, the records are not lost and can be consumed and processed by the consumer.
+
+4. If the consumer crashes after consuming 'n' records, it can start from 'n+1' record after restart 
+by using message acknowledgments and offsets. The consumer can keep track of the last successfully consumed record 
+and use that information to start from the next record after restart.
+
+5. To handle the situation where there are 5 messages in a queue and the consumer crashes after consuming the first 3 messages,
+the consumer can use message acknowledgments and offsets to keep track of the last successfully consumed message.
+This can be handled by using a cache or a persistent storage to store the offset of the last successfully consumed message.
+After restart, the consumer can use this information to fetch the 4th message from the queue and continue processing.
+
