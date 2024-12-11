@@ -47,7 +47,7 @@ https://youtu.be/PSAT-ORaQ-s
             -After : this advice will be printed if method throws any exception 
             -AfterReturning : this advice will be printed if method excutes without any exception 
             -AfterThrowing : this advice will be printed if method throws any exception 
-            -Around : this will print before and after executing the method , control is held be ProceedingJoinPoint type  
+            -Around : this will print before and after executing the method , control is held by ProceedingJoinPoint type  
 			-Pointcuts : this are expression holders which can be used by the advices 
 			
 			-Wildcards : *
@@ -193,6 +193,7 @@ https://youtu.be/PSAT-ORaQ-s
 How can we have return statements in try-catch-finaly block? All the scenarios. 
     return statements can be put in all of the try-catch-finally blocks.
     If return statemnt is in finally block, then it will override the return statement in try or catch block 
+     Answer: Return statement in finally will override the return statement in try or catch block.
     Also, if there is any println() statements. 
     Ater all the println() stateemnts are printed from all the blocks, then the return value will be displayed
 
@@ -215,8 +216,32 @@ How can you access the headers in SpringBoot using annotations? from the URI  (h
     }
 
 How can we prevent IOC containers from storing beans of some classes, and how can we explicityly tell Spring not to create beans of these clases ?
+    By using @ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {ClassName.class}))
+    By using @ComponentScan(excludeFilters = @Filter(type = FilterType.REGEX, pattern = "com.example.*Repository"))
+    By using @ComponentScan(excludeFilters = @Filter(type = FilterType.CUSTOM, classes = MyTypeFilter.class))
 
 Tell more about the Spring bean scopes(singleton,prototype,request,session,global-session) - session , request : functionality, lifecylces 
+    Singleton: 
+        -Single instance of the bean is created for the entire application 
+        -Default scope of the bean 
+        -Bean is created when the application starts and destroyed when the application stops 
+        -Bean is shared across all the requests 
+    Prototype: 
+        -New instance of the bean is created for each request 
+        -Bean is created when the request is made and destroyed when the request is completed 
+        -Bean is not shared across the requests 
+    Request: 
+        -New instance of the bean is created for each request 
+        -Bean is created when the request is made and destroyed when the request is completed 
+        -Bean is not shared across the requests 
+    Session: 
+        -New instance of the bean is created for each session 
+        -Bean is created when the session is created and destroyed when the session is destroyed 
+        -Bean is shared across the requests in the same session 
+    Global-session: 
+        -New instance of the bean is created for each global session 
+        -Bean is created when the global session is created and destroyed when the global session is destroyed 
+        -Bean is shared across the requests in the same global session
 
 Remove large chunks of ArrayList elements while simultaneously adding it 
 EmployeeList has list of employees, remove those employees who are over the age of 60 
@@ -245,8 +270,9 @@ Why in spring boot: using the command: mvn clean install, creates 2 jar files in
 
 
 What is git cherry pick ?
-
 	It is a commit process, where we can choose specific commit to push to the remote repository 
+    We can choose the commit by the commit id
+    command: git cherry-pick <commit-id>
 
 Hibernate Mappings : 
 
@@ -301,12 +327,12 @@ Hibernate Mappings :
     id,
     name, 
 
-    @ManyToOne(mappedBy="library")
+    @ManyToOne(mappedBy="libraries")
     Address address;
     ]
 
     ManyToOne mapping:
-    Many Libraries can be mapped to 1 Address
+    1 Library mapped to multiple address
     Association is owned by Address 
 
     @Entity 

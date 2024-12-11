@@ -9,8 +9,10 @@ How to provide a more robust solution to this problem , so that the data pushed 
 Consumer has successfully consumed the first 3 messages and then crashes which consuming and processing the 4th message 
 After restart, consumer has to make sure it again fetches the 4th message from the topic. Since, topic will try to push the 
 5th message from the queue. Since, for the topic, 4th message is already consumed. How to handle this situation.
+6. In Java, how does garbage collection works ?
+7. How to trick JVM not to run garbage collection ?
 
-6. One programming question: 
+8. One programming question: 
 Code was pre-written, i had to refactor the code. 
 Problem statement: 
 There is a OrderCreator service, which is responsible for creating orders for a customer. The order is about 
@@ -46,3 +48,8 @@ the consumer can use message acknowledgments and offsets to keep track of the la
 This can be handled by using a cache or a persistent storage to store the offset of the last successfully consumed message.
 After restart, the consumer can use this information to fetch the 4th message from the queue and continue processing.
 
+6. Garbage collection in Java is a process of reclaiming memory occupied by objects that are no longer in use by the application.
+
+7. To not run garbage collection, we need to make sure objects are not eligible for garbage collection. 
+In order to do this, we need to keep references of objects to not get nullified. 
+So, we should make sure we are not creating null references, and use as most primitive data types as possible.
